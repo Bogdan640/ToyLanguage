@@ -1,5 +1,6 @@
 package Model.DataStructures.Classes;
 
+import Exceptions.DataStructureException;
 import Exceptions.MyException;
 import Model.DataStructures.Interfaces.MyIDictionary;
 
@@ -15,7 +16,7 @@ public class MyDictionary<K, V> implements MyIDictionary<K, V> {
     @Override
     public void add(K key, V value) throws MyException {
         if(exist(key)){
-            throw MyException.exist(null);
+            throw DataStructureException.defined_key("Dictionary issue");
         }
         dict.put(key, value);
     }
@@ -23,7 +24,7 @@ public class MyDictionary<K, V> implements MyIDictionary<K, V> {
     @Override
     public void remove(K key) throws MyException {
         if(!exist(key)){
-            throw MyException.not_defined(null);
+            throw DataStructureException.not_defined_key("Dictionary issue, key:" + key.toString()+" not found");
         }
         dict.remove(key);
     }
@@ -31,7 +32,7 @@ public class MyDictionary<K, V> implements MyIDictionary<K, V> {
     @Override
     public void update(K key, V NewValue) throws MyException {
         if(!exist(key)){
-            throw MyException.not_defined(null);
+            throw DataStructureException.not_defined_key("Dictionary issue, key:" + key.toString()+" not found");
         }
         dict.put(key, NewValue);
     }
@@ -44,7 +45,7 @@ public class MyDictionary<K, V> implements MyIDictionary<K, V> {
     @Override
     public V find(K key) throws MyException {
         if(!exist(key)){
-            throw MyException.not_defined(null);
+            throw DataStructureException.not_defined_key("Dictionary issue, key:" + key.toString()+" not found");
         }
         return dict.get(key);
     }

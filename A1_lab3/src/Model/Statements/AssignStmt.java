@@ -1,5 +1,7 @@
 package Model.Statements;
 
+import Exceptions.DataStructureException;
+import Exceptions.ExpressionEvaluationException;
 import Exceptions.MyException;
 import Model.DataStructures.Interfaces.MyIDictionary;
 import Model.DataStructures.Interfaces.MyIStack;
@@ -30,12 +32,12 @@ public class AssignStmt implements IStmt{
             }
             else
             {
-                throw MyException.type_mismatch("The type of variable "+key+" and " +
+                throw ExpressionEvaluationException.type_mismatch("The type of variable "+key+" and " +
                         "type of the assigned expression"+val.toString()+"do not match");
             }
         }
         else
-            throw MyException.not_defined("Variable "+key+" is not initialized");
+            throw DataStructureException.not_defined_key("Variable "+key+" is not initialized");
          return state;
     }
 

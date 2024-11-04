@@ -1,6 +1,7 @@
 package Repository;
 
 import Exceptions.MyException;
+import Exceptions.RepoException;
 import Model.PrgState;
 
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ public class Repo implements IRepo{
     @Override
     public PrgState getCrtPrg() throws MyException {
         if (this.prgSTS.isEmpty()){
-            throw MyException.is_empty("REPO ERROR: There is no program state in the list");
+            throw RepoException.is_empty("REPO ERROR: There is no program state in the list");
         }
         return this.prgSTS.get(current_index);
     }

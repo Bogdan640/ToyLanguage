@@ -1,4 +1,5 @@
 package Model.DataStructures.Classes;
+import Exceptions.DataStructureException;
 import Exceptions.MyException;
 import Model.DataStructures.Interfaces.MyIStack;
 
@@ -19,7 +20,7 @@ public class MyStack<T> implements MyIStack<T> {
     @Override
     public T pop() throws MyException {
         if(stack.isEmpty()){
-            throw MyException.is_empty("Stack is empty.");
+            throw DataStructureException.data_structure_empty("Stack is empty");
         }
         return stack.pop();
     }
@@ -30,7 +31,10 @@ public class MyStack<T> implements MyIStack<T> {
     }
 
     @Override
-    public T top() {
+    public T top() throws MyException {
+        if (isEmpty()) {
+            throw DataStructureException.data_structure_empty("Stack is empty");
+        }
         return stack.peek();
     }
 

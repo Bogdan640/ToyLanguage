@@ -1,5 +1,6 @@
 package Model.Statements;
 
+import Exceptions.ExpressionEvaluationException;
 import Exceptions.MyException;
 import Model.DataStructures.Interfaces.MyIDictionary;
 import Model.DataStructures.Interfaces.MyIStack;
@@ -28,7 +29,7 @@ public class IfStmt implements IStmt{
         sym= state.getSymTable();
         IValue val=exp.eval(sym);
         if(!val.getType().equals(new BoolType()))
-            throw MyException.type_mismatch("The expression must return a boolean");
+            throw ExpressionEvaluationException.type_mismatch("The expression must return a boolean");
         BoolValue v = (BoolValue) val;
         if(v.getValue())
             stk.push(thenS);

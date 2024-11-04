@@ -1,5 +1,6 @@
 package Model.Statements;
 
+import Exceptions.DataStructureException;
 import Exceptions.MyException;
 import Model.DataStructures.Interfaces.MyIDictionary;
 import Model.PrgState;
@@ -20,7 +21,7 @@ public class VarDeclStmt implements IStmt{
     public PrgState execute(PrgState state) throws MyException {
         MyIDictionary<String, IValue> sym = state.getSymTable();
         if(sym.exist(name))
-            throw MyException.exist("Variable " +name+" is already defined in this scope");
+            throw DataStructureException.defined_key("Variable " +name+" is already defined in this scope");
         sym.add(name, type.getDefaultValue());
         return state;
     }

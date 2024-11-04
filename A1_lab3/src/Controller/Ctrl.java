@@ -1,5 +1,6 @@
 package Controller;
 
+import Exceptions.ControllerException;
 import Exceptions.MyException;
 import Model.DataStructures.Interfaces.MyIStack;
 import Model.PrgState;
@@ -29,7 +30,7 @@ public class Ctrl implements ICtrl{
     public PrgState executeOneStep(PrgState state) throws MyException {
         MyIStack<IStmt> stk = state.getExeStack();
         if (stk.isEmpty())
-            throw MyException.is_empty("CTRL ERROR: Execution stack is empty");
+            throw ControllerException.is_empty("CTRL ERROR: Execution stack is empty");
         IStmt crtStmt = stk.pop();
         crtStmt.execute(state);
         return state;

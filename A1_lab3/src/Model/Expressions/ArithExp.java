@@ -1,5 +1,6 @@
 package Model.Expressions;
 
+import Exceptions.ExpressionEvaluationException;
 import Exceptions.MyException;
 import Model.DataStructures.Classes.MyDictionary;
 import Model.DataStructures.Interfaces.MyIDictionary;
@@ -39,14 +40,14 @@ public class ArithExp implements Exp{
                     case "*" -> new IntValue(n1 * n2);
                     case "/" -> new IntValue(n1 / n2);
                     case "==" -> new BoolValue(n1==n2);
-                    default -> throw MyException.invalid_input("Invalid operator type");
+                    default -> throw ExpressionEvaluationException.invalid_input("The operator is not valid");
                 };
             }
             else
-                throw MyException.invalid_input("The second operand doesn't match the type of the first");
+                throw ExpressionEvaluationException.invalid_input("The second operand doesn't match the type of the first");
         }
         else
-            throw MyException.invalid_input("You tried to use an invalid data type");
+            throw ExpressionEvaluationException.invalid_input("You tried to use an invalid data type");
     }
 
     @Override

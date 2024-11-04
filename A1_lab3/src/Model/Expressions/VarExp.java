@@ -1,10 +1,12 @@
 package Model.Expressions;
 
+import Exceptions.DataStructureException;
 import Exceptions.MyException;
 import Model.DataStructures.Classes.MyDictionary;
 import Model.DataStructures.Interfaces.MyIDictionary;
 import Model.Values.Interfaces.IValue;
 import com.sun.jdi.Value;
+import jdk.jfr.consumer.MetadataEvent;
 
 public class VarExp implements Exp{
 
@@ -17,7 +19,7 @@ public class VarExp implements Exp{
         if(symTable.exist(key)){
             return symTable.find(key);
         }
-        throw MyException.not_defined("The variable "+ key+" is not instantiated.");
+        throw DataStructureException.not_defined_key("The key: "+key.toString()+" does not exist in the dictionary");
     }
 
     @Override

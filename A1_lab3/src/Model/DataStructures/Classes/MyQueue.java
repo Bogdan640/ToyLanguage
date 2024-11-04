@@ -1,5 +1,6 @@
 package Model.DataStructures.Classes;
 
+import Exceptions.DataStructureException;
 import Exceptions.MyException;
 import Model.DataStructures.Interfaces.MyIQueue;
 
@@ -22,13 +23,16 @@ public class MyQueue<T> implements MyIQueue<T> {
     @Override
     public T remove() throws MyException {
         if(isEmpty()){
-            throw MyException.is_empty("The queue is empty.");
+            throw DataStructureException.data_structure_empty("Queue is empty");
         }
         return queue.remove();
     }
 
     @Override
     public T top() throws MyException {
+        if (isEmpty()) {
+            throw DataStructureException.data_structure_empty("Queue is empty");
+        }
         return queue.peek();
     }
 
