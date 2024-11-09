@@ -50,4 +50,11 @@ public class MyQueue<T> implements MyIQueue<T> {
         return result.toString();
 
     }
+
+//    public Queue<T> deepCopy(){
+//        MyQueue<T> copy =new MyQueue<>();
+//        for(T item : this.queue){
+//            copy.add(item.deepcopy());
+//        }
+//    }
 }

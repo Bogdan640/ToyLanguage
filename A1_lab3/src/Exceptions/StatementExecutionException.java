@@ -8,4 +8,8 @@ public class StatementExecutionException extends MyException {
     public static StatementExecutionException executionStackEmpty() {
         return new StatementExecutionException("Attempting to execute with an empty execution stack", null);
     }
+
+    public static StatementExecutionException FileError(String additionalMessage) {
+        return new StatementExecutionException("File error", additionalMessage);
+    }
 }

@@ -2,21 +2,18 @@ package Model.Expressions;
 
 import Exceptions.ExpressionEvaluationException;
 import Exceptions.MyException;
-import Model.DataStructures.Classes.MyDictionary;
 import Model.DataStructures.Interfaces.MyIDictionary;
-import Model.Types.Classes.BoolType;
 import Model.Types.Classes.IntType;
 import Model.Values.Classes.BoolValue;
 import Model.Values.Classes.IntValue;
 import Model.Values.Interfaces.IValue;
-import com.sun.jdi.Value;
 
-public class ArithExp implements Exp{
+public class ArithExp implements IExp {
 
-    private Exp e1, e2;
+    private IExp e1, e2;
     private String op;
 
-    public ArithExp(Exp e1, String op, Exp e2){
+    public ArithExp(IExp e1, String op, IExp e2){
         this.e1=e1;
         this.e2=e2;
         this.op=op;
@@ -56,7 +53,7 @@ public class ArithExp implements Exp{
     }
 
     @Override
-    public Exp deepcopy() {
+    public IExp deepcopy() {
         return new ArithExp(e1.deepcopy(),op, e2.deepcopy());
     }
 

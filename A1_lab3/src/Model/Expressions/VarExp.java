@@ -2,13 +2,10 @@ package Model.Expressions;
 
 import Exceptions.DataStructureException;
 import Exceptions.MyException;
-import Model.DataStructures.Classes.MyDictionary;
 import Model.DataStructures.Interfaces.MyIDictionary;
 import Model.Values.Interfaces.IValue;
-import com.sun.jdi.Value;
-import jdk.jfr.consumer.MetadataEvent;
 
-public class VarExp implements Exp{
+public class VarExp implements IExp {
 
     private String key;
     public VarExp(String key){
@@ -28,7 +25,7 @@ public class VarExp implements Exp{
     }
 
     @Override
-    public Exp deepcopy() {
+    public IExp deepcopy() {
         return new VarExp(key);
     }
 }

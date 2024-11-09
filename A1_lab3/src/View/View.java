@@ -19,6 +19,7 @@ public class View {
         System.out.println("2. Execute one step");
         System.out.println("3. Execute all steps");
         System.out.println("4. Exit");
+
     }
 
     public void run(){
@@ -32,7 +33,7 @@ public class View {
                 case 1:
                     System.out.print("Choose a program state from the list: ");
                     int index = scanner.nextInt();
-                    repo.change_current_state(index);
+                    repo.change_current_state(index-1);
                     System.out.println("Done");
                     break;
                 case 2:

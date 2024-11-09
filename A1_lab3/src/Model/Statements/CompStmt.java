@@ -9,6 +9,15 @@ public class CompStmt implements IStmt{
     IStmt second;
 
     public CompStmt(IStmt first, IStmt second){
+//        if (first == null || second == null) {
+//            if (first == null)
+//                System.out.println(second.toString());
+//            else
+//                System.out.println(first.toString());
+//            if (first == null && second == null)
+//                System.out.println("\nBoth are null");
+//            throw new IllegalArgumentException("Arguments to CompStmt cannot be null");
+//        }
         this.first=first;
         this.second=second;
     }
@@ -22,7 +31,7 @@ public class CompStmt implements IStmt{
 
     @Override
     public String toString() {
-        return "("+first.toString()+";"+second.toString()+")";
+        return first.toString()+"\n"+second.toString();
     }
 
     @Override

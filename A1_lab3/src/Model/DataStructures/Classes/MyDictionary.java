@@ -58,4 +58,12 @@ public class MyDictionary<K, V> implements MyIDictionary<K, V> {
         }
         return result.toString();
     }
+
+    public MyDictionary<K, V> deepCopy(){
+        MyDictionary<K, V> copy = new MyDictionary<>();
+        for(K key: dict.keySet()){
+            copy.dict.put(key, dict.get(key));
+        }
+        return copy;
+    }
 }

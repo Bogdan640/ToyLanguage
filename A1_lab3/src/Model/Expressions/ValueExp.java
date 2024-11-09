@@ -1,12 +1,11 @@
 package Model.Expressions;
 
 import Exceptions.MyException;
-import Model.DataStructures.Classes.MyDictionary;
 import Model.DataStructures.Interfaces.MyIDictionary;
 import Model.Values.Interfaces.IValue;
 
 
-public class ValueExp implements Exp{
+public class ValueExp implements IExp {
 
     private IValue value;
 
@@ -25,7 +24,7 @@ public class ValueExp implements Exp{
     }
 
     @Override
-    public Exp deepcopy() {
+    public IExp deepcopy() {
         return new ValueExp(value.deepcopy());
     }
 }

@@ -5,7 +5,7 @@ import Exceptions.ExpressionEvaluationException;
 import Exceptions.MyException;
 import Model.DataStructures.Interfaces.MyIDictionary;
 import Model.DataStructures.Interfaces.MyIStack;
-import Model.Expressions.Exp;
+import Model.Expressions.IExp;
 import Model.PrgState;
 import Model.Types.Interfaces.IType;
 import Model.Values.Interfaces.IValue;
@@ -13,9 +13,9 @@ import Model.Values.Interfaces.IValue;
 public class AssignStmt implements IStmt{
 
     String key;
-    Exp exp;
+    IExp exp;
 
-    public AssignStmt(String key, Exp exp){
+    public AssignStmt(String key, IExp exp){
         this.exp=exp;
         this.key=key;
     }
@@ -38,12 +38,12 @@ public class AssignStmt implements IStmt{
         }
         else
             throw DataStructureException.not_defined_key("Variable "+key+" is not initialized");
-         return state;
+        return state;
     }
 
     @Override
     public String toString() {
-        return key+" = "+exp.toString();
+        return key+" = "+exp.toString()+";";
     }
 
     @Override

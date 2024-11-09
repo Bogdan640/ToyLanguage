@@ -1,15 +1,15 @@
 package Model.Statements;
 
 import Exceptions.MyException;
-import Model.Expressions.Exp;
+import Model.Expressions.IExp;
 import Model.PrgState;
 import Model.Values.Interfaces.IValue;
 
 public class PrintStmt implements IStmt{
 
-    Exp exp;
+    IExp exp;
 
-    public PrintStmt(Exp exp){
+    public PrintStmt(IExp exp){
         this.exp=exp;
     }
     @Override
@@ -21,7 +21,7 @@ public class PrintStmt implements IStmt{
 
     @Override
     public String toString() {
-        return "print("+exp.toString()+")";
+        return "print("+exp.toString()+");";
     }
 
     @Override
