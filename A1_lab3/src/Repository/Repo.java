@@ -4,10 +4,7 @@ import Exceptions.MyException;
 import Exceptions.RepoException;
 import Model.PrgState;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
@@ -23,10 +20,17 @@ public class Repo implements IRepo{
         this.current_index=0;
     }
 
-    public Repo(String filename){
+    public Repo(String filename) throws RepoException {
         this.prgSTS= new ArrayList<>();
         this.current_index=0;
         this.filename=filename;
+        try{
+            BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
+            writer.write("");
+            writer.close();
+        } catch (IOException e) {
+            throw RepoException.file_not_created("REPO ERROR: The file was not created");
+        }
     }
 
     @Override

@@ -1,5 +1,6 @@
 import Controller.Ctrl;
 import Controller.ICtrl;
+import Exceptions.RepoException;
 import Model.DataStructures.Classes.MyDictionary;
 import Model.DataStructures.Classes.MyQueue;
 import Model.DataStructures.Classes.MyStack;
@@ -14,10 +15,12 @@ import Model.Values.Classes.IntValue;
 import Model.Values.Classes.StringValue;
 import Repository.IRepo;
 import Repository.Repo;
-import View.View;
+import View.Commands.ExitCmd;
+import View.Commands.RunExample;
+import View.TextMenu;
 
 import java.io.IOException;
-import java.util.Scanner;
+
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -25,9 +28,18 @@ public class Main {
 
 
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, RepoException {
+
+
         IStmt ex1 = new CompStmt(new VarDeclStmt("v", new IntType()),
                 new CompStmt(new AssignStmt("v", new ValueExp(new IntValue(2))), new PrintStmt(new VarExp("v"))));
+        PrgState prg1 = new PrgState(new MyStack<>(), new MyDictionary<>(), new MyQueue<>(), ex1, new MyDictionary<>());
+        IRepo repo1 = new Repo("log1.txt");
+        repo1.addPrgState(prg1);
+        Ctrl ctrl1 = new Ctrl(repo1);
+
+
+
 
         IStmt ex2 = new CompStmt( new VarDeclStmt("a",new IntType()),
                 new CompStmt(new VarDeclStmt("b",new IntType()),
@@ -35,23 +47,10 @@ public class Main {
                                 ArithExp(new ValueExp(new IntValue(3)),"*",new ValueExp(new IntValue(5))))),
                                 new CompStmt(new AssignStmt("b",new ArithExp(new VarExp("a"),"+", new ValueExp(new
                                         IntValue(1)))), new PrintStmt(new VarExp("b"))))));
-
-
-
-//        IStmt ex3 = new CompStmt(new VarDeclStmt("varf", new StringType()),
-//                new CompStmt(new AssignStmt("varf", new ValueExp(new StringValue()))))
-
-//        CloseRFileStmt st49 = new CloseRFileStmt(new VarExp("varf"));
-//        CompStmt st48 = new CompStmt(new PrintStmt(new VarExp("varc")), st49);
-//        CompStmt st47 = new CompStmt(new ReadFileStmt(new VarExp("varf"), "varc"), st48);
-//        CompStmt st46 = new CompStmt(new PrintStmt(new VarExp("varc")), st47);
-//        CompStmt st45 = new CompStmt(new ReadFileStmt(new VarExp("varf"), "varc"), st46);
-//        CompStmt st44 = new CompStmt(new VarDeclStmt("varc", new IntType()), st45);
-//        CompStmt st43 = new CompStmt(new OpenRFileStmt(new VarExp("varf")), st44);
-//        CompStmt st42 = new CompStmt(new AssignStmt("varf", new ValueExp(new StringValue("test.in"))), st43);
-//        IStmt st4 = new CompStmt(new VarDeclStmt("varf", new StringType()), st42);
-//        PrgState p = new PrgState(new MyStack<>(), new MyDictionary<>(), new MyQueue<>(), st4, new MyDictionary<>());
-//
+        PrgState prg2 = new PrgState(new MyStack<>(), new MyDictionary<>(), new MyQueue<>(), ex2, new MyDictionary<>());
+        IRepo repo2 = new Repo("log2.txt");
+        repo2.addPrgState(prg2);
+        Ctrl ctrl2 = new Ctrl(repo2);
 
 
         IStmt ex3 = new CompStmt(new VarDeclStmt("varf", new StringType()),
@@ -62,21 +61,20 @@ public class Main {
                                                 new CompStmt(new PrintStmt(new VarExp("varc")),
                                                         new CompStmt(new ReadFileStmt(new VarExp("varf"), "varc"),new CloseRFileStmt(new VarExp("varf")))))))));
 
-        PrgState p = new PrgState(new MyStack<>(), new MyDictionary<>(), new MyQueue<>(), ex3, new MyDictionary<>());
+        PrgState prg3 = new PrgState(new MyStack<>(), new MyDictionary<>(), new MyQueue<>(), ex3, new MyDictionary<>());
+        IRepo repo3 = new Repo("log3.txt");
+        repo3.addPrgState(prg3);
+        Ctrl ctrl3 = new Ctrl(repo3);
 
 
-        PrgState st = new PrgState(new MyStack<>(), new MyDictionary<>(), new MyQueue<>(), ex1);
-        PrgState st2 = new PrgState(new MyStack<>(), new MyDictionary<>(), new MyQueue<>(), ex2);
-        //PrgState st3 = new PrgState(new MyStack<>(), new MyDictionary<>(), new MyQueue<>(), ex3, new MyDictionary<>());
+        TextMenu menu = new TextMenu();
+        menu.addCommand(new ExitCmd("0", "exit"));
+        menu.addCommand(new RunExample("1", ex1.toString(), ctrl1));
+        menu.addCommand(new RunExample("2", ex2.toString(), ctrl2));
+        menu.addCommand(new RunExample("3", ex3.toString(), ctrl3));
+        menu.show();
 
 
-        IRepo repo = new Repo("log21.txt");
-        repo.addPrgState(st);
-        repo.addPrgState(st2);
-        repo.addPrgState(p);
-        //repo.addPrgState(st3);
-        ICtrl ctrl = new Ctrl(repo, true);
-        View view = new View(repo, ctrl);
-        view.run();
+
         }
     }
