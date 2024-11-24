@@ -5,6 +5,7 @@ import Model.DataStructures.Classes.MyDictionary;
 import Model.DataStructures.Classes.MyQueue;
 import Model.DataStructures.Classes.MyStack;
 import Model.Expressions.ArithExp;
+import Model.Expressions.RelationalExp;
 import Model.Expressions.ValueExp;
 import Model.Expressions.VarExp;
 import Model.PrgState;
@@ -67,11 +68,26 @@ public class Main {
         Ctrl ctrl3 = new Ctrl(repo3);
 
 
+        IStmt ex4 = new CompStmt(new VarDeclStmt("a", new IntType()),
+                new CompStmt(new VarDeclStmt("b", new IntType()),
+                        new CompStmt(new AssignStmt("a", new ValueExp(new IntValue(2))),
+                                new CompStmt(new AssignStmt("b", new ValueExp(new IntValue(5))),
+                                        new PrintStmt(new RelationalExp(new VarExp("a"),"<=", new VarExp("b")))))));
+
+        PrgState prg4 = new PrgState(new MyStack<>(), new MyDictionary<>(), new MyQueue<>(), ex4, new MyDictionary<>());
+        IRepo repo4 = new Repo("log4.txt");
+        repo4.addPrgState(prg4);
+        Ctrl ctrl4 = new Ctrl(repo4);
+
+
+
+
         TextMenu menu = new TextMenu();
         menu.addCommand(new ExitCmd("0", "exit"));
         menu.addCommand(new RunExample("1", ex1.toString(), ctrl1));
         menu.addCommand(new RunExample("2", ex2.toString(), ctrl2));
         menu.addCommand(new RunExample("3", ex3.toString(), ctrl3));
+        menu.addCommand(new RunExample("4", ex4.toString(), ctrl4));
         menu.show();
 
 
