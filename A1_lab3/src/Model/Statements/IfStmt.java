@@ -4,7 +4,7 @@ import Exceptions.ExpressionEvaluationException;
 import Exceptions.MyException;
 import Model.DataStructures.Interfaces.MyIDictionary;
 import Model.DataStructures.Interfaces.MyIStack;
-import Model.Expressions.Exp;
+import Model.Expressions.IExp;
 import Model.PrgState;
 import Model.Types.Classes.BoolType;
 import Model.Values.Classes.BoolValue;
@@ -12,11 +12,11 @@ import Model.Values.Interfaces.IValue;
 
 public class IfStmt implements IStmt{
 
-    private Exp exp;
+    private IExp exp;
     private IStmt thenS;
     private IStmt elseS;
 
-    public  IfStmt(Exp e, IStmt t, IStmt el){
+    public  IfStmt(IExp e, IStmt t, IStmt el){
         this.exp=e;
         this.thenS=t;
         this.elseS=el;

@@ -7,6 +7,8 @@ import Model.PrgState;
 import Model.Statements.IStmt;
 import Repository.IRepo;
 
+import java.io.IOException;
+
 public class Ctrl implements ICtrl{
 
     private IRepo repo;
@@ -33,14 +35,18 @@ public class Ctrl implements ICtrl{
             throw ControllerException.is_empty("CTRL ERROR: Execution stack is empty");
         IStmt crtStmt = stk.pop();
         crtStmt.execute(state);
+//        if(displayFlag)
+//            System.out.println(repo.getCrtPrg());
         return state;
     }
 
     @Override
-    public void executeAll() throws MyException{
+    public void executeAll() throws MyException, IOException {
         PrgState prg =  repo.getCrtPrg();
+        repo.logPrgStateExec();
         while(!prg.getExeStack().isEmpty()){
             executeOneStep(prg);
+            repo.logPrgStateExec();
             if(displayFlag)
                 System.out.println(prg);
 
