@@ -20,4 +20,9 @@ public class StringType implements IType {
     public IValue getDefaultValue() {
         return new StringValue("");
     }
+
+    @Override
+    public IType deepCopy() {
+        return new StringType();
+    }
 }

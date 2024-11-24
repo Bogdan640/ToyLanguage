@@ -33,7 +33,7 @@ public class ReadFileStmt implements IStmt{
         if(!state.getSymTable().find(var_name).getType().equals(new IntType()))
             throw ExpressionEvaluationException.type_mismatch("The variable is not an integer");
 
-        IValue val = exp.eval(state.getSymTable());
+        IValue val = exp.eval(state.getSymTable(), state.getHeap());
 
         if (!val.getType().equals(new StringType()))
             throw ExpressionEvaluationException.type_mismatch("The expression must return a string");

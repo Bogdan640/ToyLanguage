@@ -3,6 +3,7 @@ package Model.Expressions;
 import Exceptions.ExpressionEvaluationException;
 import Exceptions.MyException;
 import Model.DataStructures.Interfaces.MyIDictionary;
+import Model.DataStructures.Interfaces.MyIHeap;
 import Model.Types.Classes.IntType;
 import Model.Values.Classes.BoolValue;
 import Model.Values.Classes.IntValue;
@@ -20,9 +21,9 @@ public class ArithExp implements IExp {
     }
 
     @Override
-    public IValue eval(MyIDictionary<String, IValue> symTable) throws MyException {
-        IValue v1 = e1.eval(symTable);
-        IValue v2 = e2.eval(symTable);
+    public IValue eval(MyIDictionary<String, IValue> symTable, MyIHeap heap) throws MyException {
+        IValue v1 = e1.eval(symTable, heap);
+        IValue v2 = e2.eval(symTable, heap);
 
         if(v1.getType().equals(new IntType())){
             if(v2.getType().equals(new IntType())){

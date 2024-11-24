@@ -63,6 +63,9 @@ public class Repo implements IRepo{
         logFile.print("\n\n");
         logFile.println("Out:");
         logFile.println(this.getCrtPrg().getOut().toString());
+        logFile.print("\n\n");
+        logFile.println("Heap:");
+        logFile.println(this.getCrtPrg().getHeap().toString());
         logFile.close();
     }
 
@@ -74,11 +77,8 @@ public class Repo implements IRepo{
 
     @Override
     public List<PrgState> getRepoCopy() {
-        List<PrgState> copy = new ArrayList<>();
-        for(PrgState prg : prgSTS){
-            copy.add(prg);
-        }
-        return copy;
+        return new ArrayList<>(prgSTS);
+
         //FIXME
         //TODO
     }
