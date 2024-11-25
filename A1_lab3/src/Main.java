@@ -2,6 +2,7 @@ import Controller.Ctrl;
 import Controller.ICtrl;
 import Exceptions.RepoException;
 import Model.DataStructures.Classes.MyDictionary;
+import Model.DataStructures.Classes.MyHeap;
 import Model.DataStructures.Classes.MyQueue;
 import Model.DataStructures.Classes.MyStack;
 import Model.Expressions.ArithExp;
@@ -34,7 +35,7 @@ public class Main {
 
         IStmt ex1 = new CompStmt(new VarDeclStmt("v", new IntType()),
                 new CompStmt(new AssignStmt("v", new ValueExp(new IntValue(2))), new PrintStmt(new VarExp("v"))));
-        PrgState prg1 = new PrgState(new MyStack<>(), new MyDictionary<>(), new MyQueue<>(), ex1, new MyDictionary<>());
+        PrgState prg1 = new PrgState(new MyStack<>(), new MyDictionary<>(), new MyQueue<>(), ex1, new MyDictionary<>(), new MyHeap());
         IRepo repo1 = new Repo("log1.txt");
         repo1.addPrgState(prg1);
         Ctrl ctrl1 = new Ctrl(repo1);
@@ -48,7 +49,7 @@ public class Main {
                                 ArithExp(new ValueExp(new IntValue(3)),"*",new ValueExp(new IntValue(5))))),
                                 new CompStmt(new AssignStmt("b",new ArithExp(new VarExp("a"),"+", new ValueExp(new
                                         IntValue(1)))), new PrintStmt(new VarExp("b"))))));
-        PrgState prg2 = new PrgState(new MyStack<>(), new MyDictionary<>(), new MyQueue<>(), ex2, new MyDictionary<>());
+        PrgState prg2 = new PrgState(new MyStack<>(), new MyDictionary<>(), new MyQueue<>(), ex2, new MyDictionary<>(), new MyHeap());
         IRepo repo2 = new Repo("log2.txt");
         repo2.addPrgState(prg2);
         Ctrl ctrl2 = new Ctrl(repo2);
@@ -62,7 +63,7 @@ public class Main {
                                                 new CompStmt(new PrintStmt(new VarExp("varc")),
                                                         new CompStmt(new ReadFileStmt(new VarExp("varf"), "varc"),new CloseRFileStmt(new VarExp("varf")))))))));
 
-        PrgState prg3 = new PrgState(new MyStack<>(), new MyDictionary<>(), new MyQueue<>(), ex3, new MyDictionary<>());
+        PrgState prg3 = new PrgState(new MyStack<>(), new MyDictionary<>(), new MyQueue<>(), ex3, new MyDictionary<>(), new MyHeap());
         IRepo repo3 = new Repo("log3.txt");
         repo3.addPrgState(prg3);
         Ctrl ctrl3 = new Ctrl(repo3);
@@ -74,10 +75,20 @@ public class Main {
                                 new CompStmt(new AssignStmt("b", new ValueExp(new IntValue(5))),
                                         new PrintStmt(new RelationalExp(new VarExp("a"),"<=", new VarExp("b")))))));
 
-        PrgState prg4 = new PrgState(new MyStack<>(), new MyDictionary<>(), new MyQueue<>(), ex4, new MyDictionary<>());
+        PrgState prg4 = new PrgState(new MyStack<>(), new MyDictionary<>(), new MyQueue<>(), ex4, new MyDictionary<>(), new MyHeap());
         IRepo repo4 = new Repo("log4.txt");
         repo4.addPrgState(prg4);
         Ctrl ctrl4 = new Ctrl(repo4);
+
+
+        IStmt ex5 = new CompStmt(new VarDeclStmt("a", new IntType()),
+                new CompStmt(new VarDeclStmt("b", new IntType()),
+                        new CompStmt(new AssignStmt("a", new ValueExp(new IntValue(2))),
+                                new CompStmt(new AssignStmt("b", new ValueExp(new IntValue(5))),
+                                        new CompStmt(new WhileStmt(new RelationalExp(new VarExp("a"),"<=", new VarExp("b")),new AssignStmt("a",new ArithExp(new VarExp("a"), "+", new ValueExp(new IntValue(1))))),
+                                                new PrintStmt(new VarExp("a")))))));
+
+        PrgState prg5
 
 
 
