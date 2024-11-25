@@ -2,11 +2,14 @@ package Model.DataStructures.Interfaces;
 
 import Exceptions.MyException;
 
+import java.util.Map;
+
 public interface MyIDictionary<K, V> {
     void add(K key, V value) throws MyException;
     void remove(K key) throws MyException;
     void update(K key, V NewValue) throws MyException;
     boolean exist(K key);
+    Map<K, V> getContent();
 
     /**
      *

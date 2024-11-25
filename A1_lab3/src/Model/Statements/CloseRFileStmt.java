@@ -22,7 +22,7 @@ public class CloseRFileStmt implements IStmt{
 
     @Override
     public PrgState execute(PrgState state) throws MyException {
-        IValue val = exp.eval(state.getSymTable());
+        IValue val = exp.eval(state.getSymTable(), state.getHeap());
         if (!val.getType().equals(new StringType()))
             throw ExpressionEvaluationException.type_mismatch("The expression must return a string value");
         StringValue filename = (StringValue) val;
@@ -34,7 +34,6 @@ public class CloseRFileStmt implements IStmt{
             if (br == null)
                 throw  StatementExecutionException.FileError("The file is not opened");
             br.close();
-            //FIXME: how should i treat find method?
             state.getFileTable().remove(filename);
         } catch (IOException e) {
             throw StatementExecutionException.FileError("The file cannot be closed");

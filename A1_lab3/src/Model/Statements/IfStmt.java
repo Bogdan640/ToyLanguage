@@ -27,7 +27,7 @@ public class IfStmt implements IStmt{
         MyIDictionary<String, IValue> sym;
         MyIStack<IStmt> stk = state.getExeStack();
         sym= state.getSymTable();
-        IValue val=exp.eval(sym);
+        IValue val=exp.eval(sym, state.getHeap());
         if(!val.getType().equals(new BoolType()))
             throw ExpressionEvaluationException.type_mismatch("The expression must return a boolean");
         BoolValue v = (BoolValue) val;

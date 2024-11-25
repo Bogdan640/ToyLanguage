@@ -3,6 +3,7 @@ package Model.Expressions;
 import Exceptions.DataStructureException;
 import Exceptions.MyException;
 import Model.DataStructures.Interfaces.MyIDictionary;
+import Model.DataStructures.Interfaces.MyIHeap;
 import Model.Values.Interfaces.IValue;
 
 public class VarExp implements IExp {
@@ -12,7 +13,7 @@ public class VarExp implements IExp {
         this.key=key;
     }
     @Override
-    public IValue eval(MyIDictionary<String, IValue> symTable) throws MyException {
+    public IValue eval(MyIDictionary<String, IValue> symTable, MyIHeap heap) throws MyException {
         if(symTable.exist(key)){
             return symTable.find(key);
         }

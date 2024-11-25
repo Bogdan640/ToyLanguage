@@ -23,5 +23,10 @@ public class IntType implements IType {
         return new IntValue(0);
     }
 
+    @Override
+    public IType deepCopy() {
+        return new IntType();
+    }
+
 }
 

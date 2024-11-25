@@ -2,6 +2,7 @@ package Model.Expressions;
 
 import Exceptions.MyException;
 import Model.DataStructures.Interfaces.MyIDictionary;
+import Model.DataStructures.Interfaces.MyIHeap;
 import Model.Values.Interfaces.IValue;
 
 
@@ -14,7 +15,7 @@ public class ValueExp implements IExp {
     }
 
     @Override
-    public IValue eval(MyIDictionary<String, IValue> symTable) throws MyException {
+    public IValue eval(MyIDictionary<String, IValue> symTable, MyIHeap heap) throws MyException {
         return this.value;
     }
 

@@ -1,9 +1,11 @@
 package Model;
 
 import Model.DataStructures.Classes.MyDictionary;
+import Model.DataStructures.Classes.MyHeap;
 import Model.DataStructures.Classes.MyQueue;
 import Model.DataStructures.Classes.MyStack;
 import Model.DataStructures.Interfaces.MyIDictionary;
+import Model.DataStructures.Interfaces.MyIHeap;
 import Model.DataStructures.Interfaces.MyIQueue;
 import Model.DataStructures.Interfaces.MyIStack;
 import Model.Statements.IStmt;
@@ -19,21 +21,25 @@ public class PrgState {
     private MyIQueue<IValue> out;
     private IStmt originalProgram;
     private MyIDictionary<StringValue, BufferedReader> fileTable;
+    private MyIHeap heap;
 
     public PrgState(MyStack<IStmt> stk, MyDictionary<String, IValue> dic, MyQueue<IValue> q, IStmt prg,
-                    MyIDictionary<StringValue, BufferedReader> fileTable){
+                    MyIDictionary<StringValue, BufferedReader> fileTable, MyHeap heap){
         this.exeStack=stk;
         this.symTable=dic;
         this.out=q;
+        this.fileTable = fileTable;
+        this.heap = heap;
         this.originalProgram= prg.deepCopy();
         this.exeStack.push(originalProgram);
-        this.fileTable = fileTable;
+
     }
 
-    public PrgState(MyStack<IStmt> stk, MyDictionary<String, IValue> dic, MyQueue<IValue> q, IStmt prg){
+    public PrgState(MyStack<IStmt> stk, MyDictionary<String, IValue> dic, MyQueue<IValue> q, IStmt prg, MyHeap heap){
         this.exeStack=stk;
         this.symTable=dic;
         this.out=q;
+        this.heap = heap;
         this.originalProgram= prg.deepCopy();
         this.exeStack.push(originalProgram);
 
@@ -63,13 +69,29 @@ public class PrgState {
     public void setOut(MyQueue<IValue> newout){
         this.out=newout;
     }
+    public IStmt getOriginalProgram(){
+        return this.originalProgram;
+    }
+    public void setOriginalProgram(IStmt newprg){
+        this.originalProgram=newprg;
+    }
+    public MyIHeap getHeap(){
+        return this.heap;
+    }
+    public void setHeap(MyHeap newHeap){
+        this.heap = newHeap;
+    }
+
 //    public PrgState deepcopy(){
 //        return new PrgState(this.exeStack.deepcopy(), this.symTable.deepcopy(), this.out.deepcopy(), this.originalProgram.deepcopy());
 //    }
 
     @Override
     public String toString(){
-        return "ExeStack: \n"+this.exeStack.toString()+"\nSymTable: \n"+this.symTable.toString()+"\nOut: "+this.out.toString()+"\n\n"+
-                "FileTable: \n"+this.fileTable.toString()+"\n";
+        return "ExeStack:\n" + exeStack.toString() +
+                "\nSymTable:\n" + symTable.toString() +
+                "\nOut:\n" + out.toString() +
+                "\nFileTable:\n" + fileTable.toString() +
+                "\nHeap:\n" + heap.toString() + "\n";
     }
 }

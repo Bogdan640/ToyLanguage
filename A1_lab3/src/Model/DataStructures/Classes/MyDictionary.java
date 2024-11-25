@@ -5,6 +5,7 @@ import Exceptions.MyException;
 import Model.DataStructures.Interfaces.MyIDictionary;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class MyDictionary<K, V> implements MyIDictionary<K, V> {
 
@@ -48,6 +49,11 @@ public class MyDictionary<K, V> implements MyIDictionary<K, V> {
             throw DataStructureException.not_defined_key("Dictionary issue, key:" + key.toString()+" not found");
         }
         return dict.get(key);
+    }
+
+    //get content
+    public Map<K, V> getContent() {
+        return this.dict;
     }
 
     @Override

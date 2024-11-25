@@ -6,5 +6,6 @@ public interface IType {
     boolean equals(Object another);
     String toString();
     IValue getDefaultValue();
+    IType deepCopy();
 
 }
