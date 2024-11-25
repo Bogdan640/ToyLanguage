@@ -158,7 +158,7 @@ public class Main {
         Ctrl ctrl8 = new Ctrl(repo8);
 
         // Example 4: test garbage collector
-        // Ref int v;new(v,20);Ref Ref int a; new(a,v); new(v,30);print(rH(rH(a)));
+        // Ref int v; new(v,20) ;Ref Ref int a; new(a,v); new(v,30);print(rH(rH(a)));
 
         VarDeclStmt varDeclStmt6 = new VarDeclStmt("v", new RefType(new IntType()));
         HeapAllocationStmt allocStmt6 = new HeapAllocationStmt("v", new ValueExp(new IntValue(20)));
@@ -179,6 +179,32 @@ public class Main {
         Ctrl ctrl9 = new Ctrl(repo9);
 
 
+        // Ref int v;
+        // new(v, 20);
+        // Ref Ref int a;
+        // new(a, v);
+        // new(v, 30);
+        // print(rH(rH(a)));
+        VarDeclStmt varDeclStmt11 = new VarDeclStmt("v", new RefType(new IntType())); // Ref int v;
+        HeapAllocationStmt allocStmt11 = new HeapAllocationStmt("v", new ValueExp(new IntValue(20))); // new(v, 20);
+        VarDeclStmt varDeclStmt21 = new VarDeclStmt("a", new RefType(new RefType(new IntType()))); // Ref Ref int a;
+        HeapAllocationStmt allocStmt21 = new HeapAllocationStmt("a", new VarExp("v")); // new(a, v);
+        HeapAllocationStmt allocStmt31 = new HeapAllocationStmt("v", new ValueExp(new IntValue(30))); // new(v, 30);
+        PrintStmt printStmt11 = new PrintStmt(new HeapReadingExp(new HeapReadingExp(new VarExp("a")))); // print(rH(rH(a)));
+
+        IStmt exGarbageCollector = new CompStmt(varDeclStmt11,
+                new CompStmt(allocStmt11,
+                        new CompStmt(varDeclStmt21,
+                                new CompStmt(allocStmt31,
+                                        new CompStmt(allocStmt21, printStmt11)))));
+        PrgState prgGarbageCollector = new PrgState(new MyStack<IStmt>(), new MyDictionary<>(), new MyQueue<>(), exGarbageCollector, new MyDictionary<>(), new MyHeap());
+        IRepo repoGarbageCollector = new Repo("logGarbageCollector.txt");
+        repoGarbageCollector.addPrgState(prgGarbageCollector);
+        Ctrl ctrlGarbageCollector = new Ctrl(repoGarbageCollector);
+
+
+
+
 
 
 
@@ -194,6 +220,8 @@ public class Main {
         menu.addCommand(new RunExample("7", ex7.toString(), ctrl7));
         menu.addCommand(new RunExample("8", ex8.toString(), ctrl8));
         menu.addCommand(new RunExample("9", ex9.toString(), ctrl9));
+        menu.addCommand(new RunExample("10", exGarbageCollector.toString(), ctrlGarbageCollector));
+
 
         menu.show();
 
