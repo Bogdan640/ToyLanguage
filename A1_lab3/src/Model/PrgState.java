@@ -1,5 +1,6 @@
 package Model;
 
+import Exceptions.DataStructureException;
 import Model.DataStructures.Classes.MyDictionary;
 import Model.DataStructures.Classes.MyHeap;
 import Model.DataStructures.Classes.MyQueue;
@@ -23,8 +24,19 @@ public class PrgState {
     private MyIDictionary<StringValue, BufferedReader> fileTable;
     private MyIHeap heap;
 
-    public PrgState(MyStack<IStmt> stk, MyDictionary<String, IValue> dic, MyQueue<IValue> q, IStmt prg,
-                    MyIDictionary<StringValue, BufferedReader> fileTable, MyHeap heap){
+    private int id;
+    private static  int global_id = 1;
+
+    public static synchronized int generate_id(){
+        return global_id++;
+    }
+
+    public int get_id(){
+        return this.id;
+    }
+
+    public PrgState(MyIStack<IStmt> stk, MyIDictionary<String, IValue> dic, MyIQueue<IValue> q, IStmt prg,
+                    MyIDictionary<StringValue, BufferedReader> fileTable, MyIHeap heap){
         this.exeStack=stk;
         this.symTable=dic;
         this.out=q;
@@ -32,16 +44,20 @@ public class PrgState {
         this.heap = heap;
         this.originalProgram= prg.deepCopy();
         this.exeStack.push(originalProgram);
+        this.id = generate_id();
 
     }
 
-    public PrgState(MyStack<IStmt> stk, MyDictionary<String, IValue> dic, MyQueue<IValue> q, IStmt prg, MyHeap heap){
+    public PrgState(MyIStack<IStmt> stk, MyIDictionary<String, IValue> dic, MyIQueue<IValue> q, IStmt prg, MyIHeap heap){
         this.exeStack=stk;
         this.symTable=dic;
         this.out=q;
         this.heap = heap;
         this.originalProgram= prg.deepCopy();
         this.exeStack.push(originalProgram);
+        this.id = generate_id();
+
+
 
     }
 
@@ -81,6 +97,15 @@ public class PrgState {
     public void setHeap(MyHeap newHeap){
         this.heap = newHeap;
     }
+    public boolean isNotCompleted(){
+        return !exeStack.isEmpty();
+    }
+    public PrgState oneStep() throws Exception{
+        if(exeStack.isEmpty())
+            throw DataStructureException.data_structure_empty("The execution stack is empty");
+        IStmt crtStmt = exeStack.pop();
+        return crtStmt.execute(this);
+    }
 
 //    public PrgState deepcopy(){
 //        return new PrgState(this.exeStack.deepcopy(), this.symTable.deepcopy(), this.out.deepcopy(), this.originalProgram.deepcopy());
@@ -88,7 +113,8 @@ public class PrgState {
 
     @Override
     public String toString(){
-        return "ExeStack:\n" + exeStack.toString() +
+        return "Program ID: "+ this.get_id()+
+                "ExeStack:\n" + exeStack.toString() +
                 "\nSymTable:\n" + symTable.toString() +
                 "\nOut:\n" + out.toString() +
                 "\nFileTable:\n" + fileTable.toString() +

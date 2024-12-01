@@ -17,6 +17,9 @@ public class DataStructureException extends MyException {
     public static DataStructureException not_defined_key(String additionalMessage) {
         return new DataStructureException("The key does not exist in the dictionary", additionalMessage);
     }
+    public static DataStructureException clone_problem(String additionalMessage) {
+        return new DataStructureException("The clone operation failed", additionalMessage);
+    }
 }
 
 

@@ -40,7 +40,7 @@ public class HeapAllocationStmt implements IStmt{
         int address = state.getHeap().allocate(value);
         symTable.update(var_name, new RefValue(address, value.getType()));
 
-        return state;
+        return null;
     }
 
 

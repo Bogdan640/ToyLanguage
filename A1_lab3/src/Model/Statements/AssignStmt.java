@@ -38,7 +38,7 @@ public class AssignStmt implements IStmt{
         }
         else
             throw DataStructureException.not_defined_key("Variable "+key+" is not initialized");
-        return state;
+        return null;
     }
 
     @Override

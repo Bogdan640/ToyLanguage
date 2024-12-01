@@ -37,7 +37,7 @@ public class OpenRFileStmt implements IStmt{
         } catch (FileNotFoundException e) {
             throw StatementExecutionException.FileError("The file does not exist");
         }
-        return state;
+        return null;
     }
 
     @Override
