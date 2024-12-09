@@ -6,7 +6,7 @@ import Model.PrgState;
 public class NoopStmt implements IStmt{
     @Override
     public PrgState execute(PrgState state) throws MyException {
-        return state;
+        return null;
     }
 
     @Override

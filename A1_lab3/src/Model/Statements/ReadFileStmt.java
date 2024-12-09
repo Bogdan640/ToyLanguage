@@ -53,7 +53,7 @@ public class ReadFileStmt implements IStmt{
         } catch (IOException e) {
             throw StatementExecutionException.FileError("The file cannot be read");
         }
-        return state;
+        return null;
     }
 
     @Override

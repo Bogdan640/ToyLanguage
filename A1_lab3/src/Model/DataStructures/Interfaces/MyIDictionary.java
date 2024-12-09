@@ -10,6 +10,7 @@ public interface MyIDictionary<K, V> {
     void update(K key, V NewValue) throws MyException;
     boolean exist(K key);
     Map<K, V> getContent();
+    MyIDictionary<K, V> clone();
 
     /**
      *

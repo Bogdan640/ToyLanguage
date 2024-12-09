@@ -23,7 +23,7 @@ public class VarDeclStmt implements IStmt{
         if(sym.exist(name))
             throw DataStructureException.defined_key("Variable " +name+" is already defined in this scope");
         sym.add(name, type.getDefaultValue());
-        return state;
+        return null;
     }
 
     @Override

@@ -43,7 +43,7 @@ public class HeapWritingStmt implements IStmt{
             throw ExpressionEvaluationException.type_mismatch("The variable " + var_name + " is not of the same type as the expression");
 
         heap.insert(address, exp_value);
-        return state;
+        return null;
     }
 
     @Override

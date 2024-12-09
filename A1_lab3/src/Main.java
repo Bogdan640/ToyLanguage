@@ -38,13 +38,11 @@ public class Main {
         Ctrl ctrl1 = new Ctrl(repo1);
 
 
-
-
-        IStmt ex2 = new CompStmt( new VarDeclStmt("a",new IntType()),
-                new CompStmt(new VarDeclStmt("b",new IntType()),
-                        new CompStmt(new AssignStmt("a", new ArithExp(new ValueExp(new IntValue(2)),"+", new
-                                ArithExp(new ValueExp(new IntValue(3)),"*",new ValueExp(new IntValue(5))))),
-                                new CompStmt(new AssignStmt("b",new ArithExp(new VarExp("a"),"+", new ValueExp(new
+        IStmt ex2 = new CompStmt(new VarDeclStmt("a", new IntType()),
+                new CompStmt(new VarDeclStmt("b", new IntType()),
+                        new CompStmt(new AssignStmt("a", new ArithExp(new ValueExp(new IntValue(2)), "+", new
+                                ArithExp(new ValueExp(new IntValue(3)), "*", new ValueExp(new IntValue(5))))),
+                                new CompStmt(new AssignStmt("b", new ArithExp(new VarExp("a"), "+", new ValueExp(new
                                         IntValue(1)))), new PrintStmt(new VarExp("b"))))));
         PrgState prg2 = new PrgState(new MyStack<>(), new MyDictionary<>(), new MyQueue<>(), ex2, new MyDictionary<>(), new MyHeap());
         IRepo repo2 = new Repo("log2.txt");
@@ -58,7 +56,7 @@ public class Main {
                                 new CompStmt(new OpenRFileStmt(new VarExp("varf")),
                                         new CompStmt(new ReadFileStmt(new VarExp("varf"), "varc"),
                                                 new CompStmt(new PrintStmt(new VarExp("varc")),
-                                                        new CompStmt(new ReadFileStmt(new VarExp("varf"), "varc"),new CloseRFileStmt(new VarExp("varf")))))))));
+                                                        new CompStmt(new ReadFileStmt(new VarExp("varf"), "varc"), new CloseRFileStmt(new VarExp("varf")))))))));
 
         PrgState prg3 = new PrgState(new MyStack<>(), new MyDictionary<>(), new MyQueue<>(), ex3, new MyDictionary<>(), new MyHeap());
         IRepo repo3 = new Repo("log3.txt");
@@ -70,7 +68,7 @@ public class Main {
                 new CompStmt(new VarDeclStmt("b", new IntType()),
                         new CompStmt(new AssignStmt("a", new ValueExp(new IntValue(2))),
                                 new CompStmt(new AssignStmt("b", new ValueExp(new IntValue(5))),
-                                        new PrintStmt(new RelationalExp(new VarExp("a"),"<=", new VarExp("b")))))));
+                                        new PrintStmt(new RelationalExp(new VarExp("a"), "<=", new VarExp("b")))))));
 
         PrgState prg4 = new PrgState(new MyStack<>(), new MyDictionary<>(), new MyQueue<>(), ex4, new MyDictionary<>(), new MyHeap());
         IRepo repo4 = new Repo("log4.txt");
@@ -82,7 +80,7 @@ public class Main {
                 new CompStmt(new VarDeclStmt("b", new IntType()),
                         new CompStmt(new AssignStmt("a", new ValueExp(new IntValue(2))),
                                 new CompStmt(new AssignStmt("b", new ValueExp(new IntValue(5))),
-                                        new CompStmt(new WhileStmt(new RelationalExp(new VarExp("a"),"<=", new VarExp("b")),new AssignStmt("a",new ArithExp(new VarExp("a"), "+", new ValueExp(new IntValue(1))))),
+                                        new CompStmt(new WhileStmt(new RelationalExp(new VarExp("a"), "<=", new VarExp("b")), new AssignStmt("a", new ArithExp(new VarExp("a"), "+", new ValueExp(new IntValue(1))))),
                                                 new PrintStmt(new VarExp("a")))))));
 
         PrgState prg5 = new PrgState(new MyStack<>(), new MyDictionary<>(), new MyQueue<>(), ex5, new MyDictionary<>(), new MyHeap());
@@ -106,15 +104,12 @@ public class Main {
                         new CompStmt(varDeclStmt2,
                                 new CompStmt(allocStmt2,
                                         new CompStmt(printStmt1, printStmt2)))));
-        
+
         PrgState prg6 = new PrgState(new MyStack<IStmt>(), new MyDictionary<>(), new MyQueue<>(), ex6, new MyDictionary<>(), new MyHeap());
         IRepo repo6 = new Repo("log6.txt");
         repo6.addPrgState(prg6);
         Ctrl ctrl6 = new Ctrl(repo6);
 
-        
-        
-        
         // Example 2: test read heap
         // Ref int v; new(v,20); Ref Ref int a; new(a,v); print(rH(v)); print(rH(rH(a)) + 5);
         VarDeclStmt varDeclStmt3 = new VarDeclStmt("v", new RefType(new IntType()));
@@ -123,7 +118,7 @@ public class Main {
         HeapAllocationStmt allocStmt4 = new HeapAllocationStmt("a", new VarExp("v"));
         PrintStmt printStmt3 = new PrintStmt(new HeapReadingExp(new VarExp("v")));
         PrintStmt printStmt4 = new PrintStmt(
-                new ArithExp(new HeapReadingExp(new HeapReadingExp(new VarExp("a"))),"+", new ValueExp(new IntValue(5))));
+                new ArithExp(new HeapReadingExp(new HeapReadingExp(new VarExp("a"))), "+", new ValueExp(new IntValue(5))));
 
         IStmt ex7 = new CompStmt(varDeclStmt3,
                 new CompStmt(allocStmt3,
@@ -135,8 +130,7 @@ public class Main {
         IRepo repo7 = new Repo("log7.txt");
         repo7.addPrgState(prg7);
         Ctrl ctrl7 = new Ctrl(repo7);
-        
-        
+
 
         // Example 3: test write heap
         // Ref int v; new(v,20); print(rH(v)); wH(v,30); print(rH(v) + 5);
@@ -145,7 +139,7 @@ public class Main {
         PrintStmt printStmt5 = new PrintStmt(new HeapReadingExp(new VarExp("v")));
         HeapWritingStmt writeHeap1 = new HeapWritingStmt("v", new ValueExp(new IntValue(30)));
         PrintStmt printStmt6 = new PrintStmt(
-                new ArithExp(new HeapReadingExp(new VarExp("v")),"+", new ValueExp(new IntValue(5))));
+                new ArithExp(new HeapReadingExp(new VarExp("v")), "+", new ValueExp(new IntValue(5))));
 
         IStmt ex8 = new CompStmt(varDeclStmt5,
                 new CompStmt(allocStmt5,
@@ -188,8 +182,8 @@ public class Main {
         VarDeclStmt varDeclStmt11 = new VarDeclStmt("v", new RefType(new IntType())); // Ref int v;
         HeapAllocationStmt allocStmt11 = new HeapAllocationStmt("v", new ValueExp(new IntValue(20))); // new(v, 20);
         VarDeclStmt varDeclStmt21 = new VarDeclStmt("a", new RefType(new RefType(new IntType()))); // Ref Ref int a;
-        HeapAllocationStmt allocStmt21 = new HeapAllocationStmt("a", new VarExp("v")); // new(a, v);
-        HeapAllocationStmt allocStmt31 = new HeapAllocationStmt("v", new ValueExp(new IntValue(30))); // new(v, 30);
+        HeapAllocationStmt allocStmt31 = new HeapAllocationStmt("a", new VarExp("v")); // new(a, v);
+        HeapAllocationStmt allocStmt21 = new HeapAllocationStmt("v", new ValueExp(new IntValue(30))); // new(v, 30);
         PrintStmt printStmt11 = new PrintStmt(new HeapReadingExp(new HeapReadingExp(new VarExp("a")))); // print(rH(rH(a)));
 
         IStmt exGarbageCollector = new CompStmt(varDeclStmt11,
@@ -201,11 +195,35 @@ public class Main {
         IRepo repoGarbageCollector = new Repo("logGarbageCollector.txt");
         repoGarbageCollector.addPrgState(prgGarbageCollector);
         Ctrl ctrlGarbageCollector = new Ctrl(repoGarbageCollector);
+        
+        
+        
+        // example 1
+        // int v; Ref int a; v=10;new(a,22);
+        // fork(wH(a,30);v=32;print(v);print(rH(a)));
+        // print(v);print(rH(a))
 
+        VarDeclStmt varDeclStmt1111 = new VarDeclStmt("v", new IntType());
+        VarDeclStmt varDeclStmt2111 = new VarDeclStmt("a", new RefType(new IntType()));
+        AssignStmt assignStmt1111 = new AssignStmt("v", new ValueExp(new IntValue(10)));
+        HeapAllocationStmt memoryStmt1111 = new HeapAllocationStmt("a", new ValueExp(new IntValue(22)));
+        HeapWritingStmt writeHeapStmt1111 = new HeapWritingStmt("a", new ValueExp(new IntValue(30)));
+        AssignStmt assignStmt2111 = new AssignStmt("v", new ValueExp(new IntValue(32)));
+        PrintStmt printStmt1111 = new PrintStmt(new VarExp("v"));
+        PrintStmt printStmt2111 = new PrintStmt(new HeapReadingExp(new VarExp("a")));
+        ForkStmt forkStmt1111 = new ForkStmt(new CompStmt(writeHeapStmt1111, new CompStmt(assignStmt2111, new CompStmt(printStmt1111, printStmt2111))));
+        PrintStmt printStmt3111 = new PrintStmt(new VarExp("v"));
+        PrintStmt printStmt4111 = new PrintStmt(new HeapReadingExp(new VarExp("a")));
 
+        IStmt ex1111 = new CompStmt(varDeclStmt1111, new CompStmt(varDeclStmt2111, new CompStmt(assignStmt1111,
+                new CompStmt(memoryStmt1111, new CompStmt(forkStmt1111, new CompStmt(printStmt3111, printStmt4111))))));
 
-
-
+        PrgState prg11 = new PrgState(new MyStack<IStmt>(), new MyDictionary<>(), new MyQueue<>(), ex1111, new MyDictionary<>(), new MyHeap());
+        IRepo repo11 = new Repo("log11.txt");
+        repo11.addPrgState(prg11);
+        //repo11.addPrgState(prg9);
+        //repo11.addPrgState(prg8);
+        Ctrl ctrl11 = new Ctrl(repo11);
 
 
 
@@ -221,6 +239,7 @@ public class Main {
         menu.addCommand(new RunExample("8", ex8.toString(), ctrl8));
         menu.addCommand(new RunExample("9", ex9.toString(), ctrl9));
         menu.addCommand(new RunExample("10", exGarbageCollector.toString(), ctrlGarbageCollector));
+        menu.addCommand(new RunExample("11", ex1111.toString(), ctrl11));
 
 
         menu.show();

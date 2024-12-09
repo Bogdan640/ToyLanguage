@@ -3,6 +3,7 @@ package Model.DataStructures.Classes;
 import Exceptions.DataStructureException;
 import Exceptions.MyException;
 import Model.DataStructures.Interfaces.MyIDictionary;
+import Model.Values.Interfaces.IValue;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -54,6 +55,20 @@ public class MyDictionary<K, V> implements MyIDictionary<K, V> {
     //get content
     public Map<K, V> getContent() {
         return this.dict;
+    }
+
+    @Override
+    public MyIDictionary<K, V> clone() {
+        MyIDictionary<K, V> clone = new MyDictionary<K, V>();
+        for(K key: dict.keySet()){
+            IValue value = (IValue) dict.get(key);
+            try {
+                clone.add(key, (V) value.deepcopy());
+            } catch (MyException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return clone;
     }
 
     @Override

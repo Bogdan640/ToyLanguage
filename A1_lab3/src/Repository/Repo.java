@@ -33,13 +33,13 @@ public class Repo implements IRepo{
         }
     }
 
-    @Override
-    public PrgState getCrtPrg() throws MyException {
-        if (this.prgSTS.isEmpty()){
-            throw RepoException.is_empty("REPO ERROR: There is no program state in the list");
-        }
-        return this.prgSTS.get(current_index);
-    }
+//    @Override
+//    public PrgState getCrtPrg() throws MyException {
+//        if (this.prgSTS.isEmpty()){
+//            throw RepoException.is_empty("REPO ERROR: There is no program state in the list");
+//        }
+//        return this.prgSTS.get(current_index);
+//    }
 
     @Override
     public void addPrgState(PrgState new_state) {
@@ -53,19 +53,20 @@ public class Repo implements IRepo{
     }
 
     @Override
-    public void logPrgStateExec() throws MyException, IOException {
+    public void logPrgStateExec(PrgState prg) throws MyException, IOException {
         PrintWriter logFile = new PrintWriter(new BufferedWriter(new FileWriter(filename, true)));
+        logFile.println("Program State ID: "+prg.get_id());
         logFile.println("ExeStack:");
-        logFile.println(this.getCrtPrg().getExeStack().toString());
+        logFile.println(prg.getExeStack().toString());
         logFile.print("\n\n");
         logFile.println("SymTable:");
-        logFile.println(this.getCrtPrg().getSymTable().toString());
+        logFile.println(prg.getSymTable().toString());
         logFile.print("\n\n");
         logFile.println("Out:");
-        logFile.println(this.getCrtPrg().getOut().toString());
+        logFile.println(prg.getOut().toString());
         logFile.print("\n\n");
         logFile.println("Heap:");
-        logFile.println(this.getCrtPrg().getHeap().toString());
+        logFile.println(prg.getHeap().toString());
         logFile.close();
     }
 
@@ -78,9 +79,16 @@ public class Repo implements IRepo{
     @Override
     public List<PrgState> getRepoCopy() {
         return new ArrayList<>(prgSTS);
+    }
 
-        //FIXME
-        //TODO
+    @Override
+    public List<PrgState> getPrgList() {
+        return this.prgSTS;
+    }
+
+    @Override
+    public void setPrgList(List<PrgState> prgList) {
+        this.prgSTS=prgList;
     }
 
 }

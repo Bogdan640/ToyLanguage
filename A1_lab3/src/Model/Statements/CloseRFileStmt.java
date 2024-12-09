@@ -39,7 +39,7 @@ public class CloseRFileStmt implements IStmt{
             throw StatementExecutionException.FileError("The file cannot be closed");
         }
 
-        return state;
+        return null;
     }
 
     @Override
