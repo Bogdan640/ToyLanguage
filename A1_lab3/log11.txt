@@ -1,0 +1,911 @@
+Program State ID: 11
+ExeStack:
+int v;
+Ref(int) a;
+v = 10;
+new(a, 22)
+fork(wH(a, 30);
+v = 32;
+print(v);
+print(rH(a));)
+print(v);
+print(rH(a));
+
+
+
+SymTable:
+
+
+
+Out:
+
+
+
+Heap:
+
+Program State ID: 11
+ExeStack:
+int v;
+Ref(int) a;
+v = 10;
+new(a, 22)
+fork(wH(a, 30);
+v = 32;
+print(v);
+print(rH(a));)
+print(v);
+print(rH(a));
+
+
+
+SymTable:
+
+
+
+Out:
+
+
+
+Heap:
+
+Program State ID: 11
+ExeStack:
+int v;
+Ref(int) a;
+v = 10;
+new(a, 22)
+fork(wH(a, 30);
+v = 32;
+print(v);
+print(rH(a));)
+print(v);
+print(rH(a));
+
+
+
+SymTable:
+
+
+
+Out:
+
+
+
+Heap:
+
+Program State ID: 11
+ExeStack:
+Ref(int) a;
+v = 10;
+new(a, 22)
+fork(wH(a, 30);
+v = 32;
+print(v);
+print(rH(a));)
+print(v);
+print(rH(a));
+
+
+
+SymTable:
+v -> 0
+
+
+
+Out:
+
+
+
+Heap:
+
+Program State ID: 11
+ExeStack:
+Ref(int) a;
+v = 10;
+new(a, 22)
+fork(wH(a, 30);
+v = 32;
+print(v);
+print(rH(a));)
+print(v);
+print(rH(a));
+
+
+
+SymTable:
+v -> 0
+
+
+
+Out:
+
+
+
+Heap:
+
+Program State ID: 11
+ExeStack:
+Ref(int) a;
+v = 10;
+new(a, 22)
+fork(wH(a, 30);
+v = 32;
+print(v);
+print(rH(a));)
+print(v);
+print(rH(a));
+
+
+
+SymTable:
+v -> 0
+
+
+
+Out:
+
+
+
+Heap:
+
+Program State ID: 11
+ExeStack:
+Ref(int) a;
+v = 10;
+new(a, 22)
+fork(wH(a, 30);
+v = 32;
+print(v);
+print(rH(a));)
+print(v);
+print(rH(a));
+
+
+
+SymTable:
+v -> 0
+
+
+
+Out:
+
+
+
+Heap:
+
+Program State ID: 11
+ExeStack:
+v = 10;
+new(a, 22)
+fork(wH(a, 30);
+v = 32;
+print(v);
+print(rH(a));)
+print(v);
+print(rH(a));
+
+
+
+SymTable:
+a -> (0, int)
+v -> 0
+
+
+
+Out:
+
+
+
+Heap:
+
+Program State ID: 11
+ExeStack:
+v = 10;
+new(a, 22)
+fork(wH(a, 30);
+v = 32;
+print(v);
+print(rH(a));)
+print(v);
+print(rH(a));
+
+
+
+SymTable:
+a -> (0, int)
+v -> 0
+
+
+
+Out:
+
+
+
+Heap:
+
+Program State ID: 11
+ExeStack:
+v = 10;
+new(a, 22)
+fork(wH(a, 30);
+v = 32;
+print(v);
+print(rH(a));)
+print(v);
+print(rH(a));
+
+
+
+SymTable:
+a -> (0, int)
+v -> 0
+
+
+
+Out:
+
+
+
+Heap:
+
+Program State ID: 11
+ExeStack:
+v = 10;
+new(a, 22)
+fork(wH(a, 30);
+v = 32;
+print(v);
+print(rH(a));)
+print(v);
+print(rH(a));
+
+
+
+SymTable:
+a -> (0, int)
+v -> 0
+
+
+
+Out:
+
+
+
+Heap:
+
+Program State ID: 11
+ExeStack:
+new(a, 22)
+fork(wH(a, 30);
+v = 32;
+print(v);
+print(rH(a));)
+print(v);
+print(rH(a));
+
+
+
+SymTable:
+a -> (0, int)
+v -> 10
+
+
+
+Out:
+
+
+
+Heap:
+
+Program State ID: 11
+ExeStack:
+new(a, 22)
+fork(wH(a, 30);
+v = 32;
+print(v);
+print(rH(a));)
+print(v);
+print(rH(a));
+
+
+
+SymTable:
+a -> (0, int)
+v -> 10
+
+
+
+Out:
+
+
+
+Heap:
+
+Program State ID: 11
+ExeStack:
+new(a, 22)
+fork(wH(a, 30);
+v = 32;
+print(v);
+print(rH(a));)
+print(v);
+print(rH(a));
+
+
+
+SymTable:
+a -> (0, int)
+v -> 10
+
+
+
+Out:
+
+
+
+Heap:
+
+Program State ID: 11
+ExeStack:
+new(a, 22)
+fork(wH(a, 30);
+v = 32;
+print(v);
+print(rH(a));)
+print(v);
+print(rH(a));
+
+
+
+SymTable:
+a -> (0, int)
+v -> 10
+
+
+
+Out:
+
+
+
+Heap:
+
+Program State ID: 11
+ExeStack:
+fork(wH(a, 30);
+v = 32;
+print(v);
+print(rH(a));)
+print(v);
+print(rH(a));
+
+
+
+SymTable:
+a -> (1, int)
+v -> 10
+
+
+
+Out:
+
+
+
+Heap:
+1 -> 22
+
+Program State ID: 11
+ExeStack:
+fork(wH(a, 30);
+v = 32;
+print(v);
+print(rH(a));)
+print(v);
+print(rH(a));
+
+
+
+SymTable:
+a -> (1, int)
+v -> 10
+
+
+
+Out:
+
+
+
+Heap:
+1 -> 22
+
+Program State ID: 11
+ExeStack:
+fork(wH(a, 30);
+v = 32;
+print(v);
+print(rH(a));)
+print(v);
+print(rH(a));
+
+
+
+SymTable:
+a -> (1, int)
+v -> 10
+
+
+
+Out:
+
+
+
+Heap:
+1 -> 22
+
+Program State ID: 11
+ExeStack:
+fork(wH(a, 30);
+v = 32;
+print(v);
+print(rH(a));)
+print(v);
+print(rH(a));
+
+
+
+SymTable:
+a -> (1, int)
+v -> 10
+
+
+
+Out:
+
+
+
+Heap:
+1 -> 22
+
+Program State ID: 11
+ExeStack:
+print(v);
+print(rH(a));
+
+
+
+SymTable:
+a -> (1, int)
+v -> 10
+
+
+
+Out:
+
+
+
+Heap:
+1 -> 22
+
+Program State ID: 12
+ExeStack:
+wH(a, 30);
+v = 32;
+print(v);
+print(rH(a));
+
+
+
+SymTable:
+a -> (1, int)
+v -> 10
+
+
+
+Out:
+
+
+
+Heap:
+1 -> 22
+
+Program State ID: 11
+ExeStack:
+print(v);
+print(rH(a));
+
+
+
+SymTable:
+a -> (1, int)
+v -> 10
+
+
+
+Out:
+
+
+
+Heap:
+1 -> 22
+
+Program State ID: 12
+ExeStack:
+wH(a, 30);
+v = 32;
+print(v);
+print(rH(a));
+
+
+
+SymTable:
+a -> (1, int)
+v -> 10
+
+
+
+Out:
+
+
+
+Heap:
+1 -> 22
+
+Program State ID: 11
+ExeStack:
+print(v);
+print(rH(a));
+
+
+
+SymTable:
+a -> (1, int)
+v -> 10
+
+
+
+Out:
+
+
+
+Heap:
+1 -> 22
+
+Program State ID: 12
+ExeStack:
+wH(a, 30);
+v = 32;
+print(v);
+print(rH(a));
+
+
+
+SymTable:
+a -> (1, int)
+v -> 10
+
+
+
+Out:
+
+
+
+Heap:
+1 -> 22
+
+Program State ID: 11
+ExeStack:
+print(v);
+print(rH(a));
+
+
+
+SymTable:
+a -> (1, int)
+v -> 10
+
+
+
+Out:
+
+
+
+Heap:
+1 -> 22
+
+Program State ID: 12
+ExeStack:
+wH(a, 30);
+v = 32;
+print(v);
+print(rH(a));
+
+
+
+SymTable:
+a -> (1, int)
+v -> 10
+
+
+
+Out:
+
+
+
+Heap:
+1 -> 22
+
+Program State ID: 11
+ExeStack:
+print(rH(a));
+
+
+
+SymTable:
+a -> (1, int)
+v -> 10
+
+
+
+Out:
+10 
+
+
+Heap:
+1 -> 30
+
+Program State ID: 12
+ExeStack:
+v = 32;
+print(v);
+print(rH(a));
+
+
+
+SymTable:
+a -> (1, int)
+v -> 10
+
+
+
+Out:
+10 
+
+
+Heap:
+1 -> 30
+
+Program State ID: 11
+ExeStack:
+print(rH(a));
+
+
+
+SymTable:
+a -> (1, int)
+v -> 10
+
+
+
+Out:
+10 
+
+
+Heap:
+1 -> 30
+
+Program State ID: 12
+ExeStack:
+v = 32;
+print(v);
+print(rH(a));
+
+
+
+SymTable:
+a -> (1, int)
+v -> 10
+
+
+
+Out:
+10 
+
+
+Heap:
+1 -> 30
+
+Program State ID: 11
+ExeStack:
+
+
+
+SymTable:
+a -> (1, int)
+v -> 10
+
+
+
+Out:
+10 30 
+
+
+Heap:
+1 -> 30
+
+Program State ID: 12
+ExeStack:
+v = 32;
+print(v);
+print(rH(a));
+
+
+
+SymTable:
+a -> (1, int)
+v -> 10
+
+
+
+Out:
+10 30 
+
+
+Heap:
+1 -> 30
+
+Program State ID: 12
+ExeStack:
+v = 32;
+print(v);
+print(rH(a));
+
+
+
+SymTable:
+a -> (1, int)
+v -> 10
+
+
+
+Out:
+10 30 
+
+
+Heap:
+1 -> 30
+
+Program State ID: 12
+ExeStack:
+print(v);
+print(rH(a));
+
+
+
+SymTable:
+a -> (1, int)
+v -> 32
+
+
+
+Out:
+10 30 
+
+
+Heap:
+1 -> 30
+
+Program State ID: 12
+ExeStack:
+print(v);
+print(rH(a));
+
+
+
+SymTable:
+a -> (1, int)
+v -> 32
+
+
+
+Out:
+10 30 
+
+
+Heap:
+1 -> 30
+
+Program State ID: 12
+ExeStack:
+print(v);
+print(rH(a));
+
+
+
+SymTable:
+a -> (1, int)
+v -> 32
+
+
+
+Out:
+10 30 
+
+
+Heap:
+1 -> 30
+
+Program State ID: 12
+ExeStack:
+print(v);
+print(rH(a));
+
+
+
+SymTable:
+a -> (1, int)
+v -> 32
+
+
+
+Out:
+10 30 
+
+
+Heap:
+1 -> 30
+
+Program State ID: 12
+ExeStack:
+print(rH(a));
+
+
+
+SymTable:
+a -> (1, int)
+v -> 32
+
+
+
+Out:
+10 30 32 
+
+
+Heap:
+1 -> 30
+
+Program State ID: 12
+ExeStack:
+print(rH(a));
+
+
+
+SymTable:
+a -> (1, int)
+v -> 32
+
+
+
+Out:
+10 30 32 
+
+
+Heap:
+1 -> 30
+
+Program State ID: 12
+ExeStack:
+
+
+
+SymTable:
+a -> (1, int)
+v -> 32
+
+
+
+Out:
+10 30 32 30 
+
+
+Heap:
+1 -> 30
+
