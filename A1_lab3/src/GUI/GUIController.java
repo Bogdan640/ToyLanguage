@@ -132,20 +132,11 @@ public class GUIController{
                 controller.executor.shutdownNow();
                 return;
             }
-            System.out.println("HERE: " + prgList.size());  //output is 1
-            for (PrgState prg : prgList) {
-                try {
-                    System.out.println(prg);
-                } catch (Exception ex) {
-                    System.err.println("Error printing PrgState: " + ex.getMessage());
-                }
-            }
 
-            System.out.println("HERE: " + prgList.size());
-            // Garbage collection
-//            prgList.forEach(prg -> prg.getHeap().setContent(
-//                    controller.conservativeGarbageCollector(prgList)
-//            ));
+            //Garbage collection
+            prgList.forEach(prg -> prg.getHeap().setContent(
+                    controller.conservativeGarbageCollector(prgList)
+            ));
 
 
             //display program list on terminal

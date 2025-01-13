@@ -138,6 +138,14 @@ public class PrgState {
 
     @Override
     public String toString(){
+        if(getOut() == null)
+            return "Program ID: "+ this.get_id()+
+                    "ExeStack:\n" + exeStack.toString() +
+                    "\nSymTable:\n" + symTable.toString() +
+                    "\nOut:\n" + output.toString() +
+                    "\nFileTable:\n" + fileTable.toString() +
+                    "\nHeap:\n" + heap.toString() + "\n";
+
         return "Program ID: "+ this.get_id()+
                 "ExeStack:\n" + exeStack.toString() +
                 "\nSymTable:\n" + symTable.toString() +

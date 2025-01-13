@@ -119,7 +119,9 @@ public class Ctrl implements ICtrl{
     public void oneStepForAllPrg(List<PrgState> prgList) throws InterruptedException {
         prgList.forEach(prg -> {
             try {
+
                 repo.logPrgStateExec(prg);
+
                 //displayPrgState();
             } catch (MyException | IOException e) {
                 throw new RuntimeException(e);
