@@ -8,4 +8,7 @@ public class ControllerException extends MyException {
   public static RepoException is_empty(String additionalMessage) {
     return new RepoException("The repository is empty", additionalMessage);
   }
+
+  
+
 }

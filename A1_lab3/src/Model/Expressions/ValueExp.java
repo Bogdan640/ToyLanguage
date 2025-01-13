@@ -3,6 +3,7 @@ package Model.Expressions;
 import Exceptions.MyException;
 import Model.DataStructures.Interfaces.MyIDictionary;
 import Model.DataStructures.Interfaces.MyIHeap;
+import Model.Types.Interfaces.IType;
 import Model.Values.Interfaces.IValue;
 
 
@@ -27,5 +28,10 @@ public class ValueExp implements IExp {
     @Override
     public IExp deepcopy() {
         return new ValueExp(value.deepcopy());
+    }
+
+    @Override
+    public IType typecheck(MyIDictionary<String, IType> typeEnv) throws MyException {
+        return value.getType();
     }
 }

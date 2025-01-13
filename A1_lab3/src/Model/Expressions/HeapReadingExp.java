@@ -8,6 +8,7 @@ import Model.DataStructures.Interfaces.MyIHeap;
 import Model.PrgState;
 import Model.Statements.IStmt;
 import Model.Types.Classes.RefType;
+import Model.Types.Interfaces.IType;
 import Model.Values.Classes.RefValue;
 import Model.Values.Interfaces.IValue;
 
@@ -36,6 +37,16 @@ public class HeapReadingExp implements IExp {
     @Override
     public IExp deepcopy() {
         return new HeapReadingExp(exp.deepcopy());
+    }
+
+    @Override
+    public IType typecheck(MyIDictionary<String, IType> typeEnv) throws MyException {
+        IType type = exp.typecheck(typeEnv);
+        if (type instanceof RefType refType) {
+            return refType.getInner();
+        } else {
+            throw ExpressionEvaluationException.type_mismatch("The expression " + exp.toString() + " is not a reference");
+        }
     }
 
     @Override

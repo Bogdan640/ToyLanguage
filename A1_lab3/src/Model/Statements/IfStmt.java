@@ -2,11 +2,13 @@ package Model.Statements;
 
 import Exceptions.ExpressionEvaluationException;
 import Exceptions.MyException;
+import Model.DataStructures.Classes.MyDictionary;
 import Model.DataStructures.Interfaces.MyIDictionary;
 import Model.DataStructures.Interfaces.MyIStack;
 import Model.Expressions.IExp;
 import Model.PrgState;
 import Model.Types.Classes.BoolType;
+import Model.Types.Interfaces.IType;
 import Model.Values.Classes.BoolValue;
 import Model.Values.Interfaces.IValue;
 
@@ -46,5 +48,18 @@ public class IfStmt implements IStmt{
     @Override
     public IStmt deepCopy() {
         return new IfStmt(exp.deepcopy(), thenS.deepCopy(), elseS.deepCopy());
+    }
+
+    @Override
+    public MyIDictionary<String, IType> typecheck(MyIDictionary<String, IType> typeEnv) throws MyException {
+        IType typeexp = exp.typecheck(typeEnv);
+        if(typeexp.equals(new BoolType()))
+        {
+            thenS.typecheck(typeEnv);
+            elseS.typecheck(typeEnv);
+            return typeEnv;
+        }
+        else
+            throw ExpressionEvaluationException.type_mismatch("The condition of IF has not the type bool");
     }
 }

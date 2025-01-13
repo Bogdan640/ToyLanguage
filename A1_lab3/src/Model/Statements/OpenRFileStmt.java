@@ -4,9 +4,12 @@ import Exceptions.DataStructureException;
 import Exceptions.ExpressionEvaluationException;
 import Exceptions.MyException;
 import Exceptions.StatementExecutionException;
+import Model.DataStructures.Classes.MyDictionary;
+import Model.DataStructures.Interfaces.MyIDictionary;
 import Model.Expressions.IExp;
 import Model.PrgState;
 import Model.Types.Classes.StringType;
+import Model.Types.Interfaces.IType;
 import Model.Values.Classes.StringValue;
 import Model.Values.Interfaces.IValue;
 
@@ -43,6 +46,12 @@ public class OpenRFileStmt implements IStmt{
     @Override
     public IStmt deepCopy() {
         return new OpenRFileStmt(exp.deepcopy());
+    }
+
+    @Override
+    public MyIDictionary<String, IType> typecheck(MyIDictionary<String, IType> typeEnv) throws MyException {
+        exp.typecheck(typeEnv);
+        return typeEnv;
     }
 
     @Override

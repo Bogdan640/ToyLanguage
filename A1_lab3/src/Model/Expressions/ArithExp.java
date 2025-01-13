@@ -5,6 +5,7 @@ import Exceptions.MyException;
 import Model.DataStructures.Interfaces.MyIDictionary;
 import Model.DataStructures.Interfaces.MyIHeap;
 import Model.Types.Classes.IntType;
+import Model.Types.Interfaces.IType;
 import Model.Values.Classes.BoolValue;
 import Model.Values.Classes.IntValue;
 import Model.Values.Interfaces.IValue;
@@ -56,6 +57,18 @@ public class ArithExp implements IExp {
     @Override
     public IExp deepcopy() {
         return new ArithExp(e1.deepcopy(),op, e2.deepcopy());
+    }
+
+    @Override
+    public IType typecheck(MyIDictionary<String, IType> typeEnv) throws MyException {
+        IType t1, t2;
+        t1 = e1.typecheck(typeEnv);
+        t2 = e2.typecheck(typeEnv);
+        if (t1.equals(new IntType())) {
+            if (t2.equals(new IntType())) {
+                return new IntType();
+            } else throw ExpressionEvaluationException.invalid_input("Second operand is not an integer");
+        } else throw ExpressionEvaluationException.invalid_input("First operand is not an integer");
     }
 
 
