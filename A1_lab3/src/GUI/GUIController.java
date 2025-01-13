@@ -124,7 +124,7 @@ public class GUIController{
 
             // Remove the completed programs
             List<PrgState> prgList = controller.removeCompletedPrg(controller.getRepo().getPrgList());
-
+            //pr
             if (prgList.isEmpty()) {
                 showError("No more steps to execute.");
                 prgStateListView.getItems().clear();
