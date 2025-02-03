@@ -2,6 +2,7 @@ package Model.Statements;
 
 import Exceptions.DataStructureException;
 import Exceptions.MyException;
+import Model.DataStructures.Classes.MyDictionary;
 import Model.DataStructures.Interfaces.MyIDictionary;
 import Model.PrgState;
 import Model.Types.Interfaces.IType;
@@ -34,5 +35,11 @@ public class VarDeclStmt implements IStmt{
     @Override
     public IStmt deepCopy() {
         return new VarDeclStmt(new String(name), type);
+    }
+
+    @Override
+    public MyIDictionary<String, IType> typecheck(MyIDictionary<String, IType> typeEnv) throws MyException {
+        typeEnv.add(this.name, this.type);
+        return typeEnv;
     }
 }

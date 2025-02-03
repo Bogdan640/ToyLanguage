@@ -5,10 +5,7 @@ import Model.DataStructures.Classes.MyDictionary;
 import Model.DataStructures.Classes.MyHeap;
 import Model.DataStructures.Classes.MyQueue;
 import Model.DataStructures.Classes.MyStack;
-import Model.DataStructures.Interfaces.MyIDictionary;
-import Model.DataStructures.Interfaces.MyIHeap;
-import Model.DataStructures.Interfaces.MyIQueue;
-import Model.DataStructures.Interfaces.MyIStack;
+import Model.DataStructures.Interfaces.*;
 import Model.Statements.IStmt;
 import Model.Values.Classes.StringValue;
 import Model.Values.Interfaces.IValue;
@@ -20,6 +17,7 @@ public class PrgState {
     private MyIStack<IStmt> exeStack;
     private MyIDictionary<String, IValue> symTable;
     private MyIQueue<IValue> out;
+    private MyIList<IValue> output;
     private IStmt originalProgram;
     private MyIDictionary<StringValue, BufferedReader> fileTable;
     private MyIHeap heap;
@@ -56,13 +54,37 @@ public class PrgState {
         this.originalProgram= prg.deepCopy();
         this.exeStack.push(originalProgram);
         this.id = generate_id();
+    }
+
+    public PrgState(MyIStack<IStmt> stk, MyIDictionary<String, IValue> dic, MyIList<IValue> q, IStmt prg,
+                    MyIDictionary<StringValue, BufferedReader> fileTable, MyIHeap heap){
+        this.exeStack=stk;
+        this.symTable=dic;
+        this.output=q;
+        this.fileTable = fileTable;
+        this.heap = heap;
+        this.originalProgram= prg.deepCopy();
+        this.exeStack.push(originalProgram);
+        this.id = generate_id();
+
+    }
 
 
-
+    public PrgState(MyIStack<IStmt> stk, MyIDictionary<String, IValue> dic, MyIList<IValue> q, IStmt prg, MyIHeap heap){
+        this.exeStack=stk;
+        this.symTable=dic;
+        this.output=q;
+        this.heap = heap;
+        this.originalProgram= prg.deepCopy();
+        this.exeStack.push(originalProgram);
+        this.id = generate_id();
     }
 
     public MyIDictionary<StringValue, BufferedReader> getFileTable(){
         return this.fileTable;
+    }
+    public int getId() {
+        return this.id;
     }
     public void setFileTable(MyDictionary<StringValue, BufferedReader> newFileTable){
         this.fileTable = newFileTable;
@@ -81,6 +103,9 @@ public class PrgState {
     }
     public MyIQueue<IValue> getOut(){
         return this.out;
+    }
+    public MyIList<IValue> getOutput(){
+        return this.output;
     }
     public void setOut(MyQueue<IValue> newout){
         this.out=newout;
@@ -113,6 +138,14 @@ public class PrgState {
 
     @Override
     public String toString(){
+        if(getOut() == null)
+            return "Program ID: "+ this.get_id()+
+                    "ExeStack:\n" + exeStack.toString() +
+                    "\nSymTable:\n" + symTable.toString() +
+                    "\nOut:\n" + output.toString() +
+                    "\nFileTable:\n" + fileTable.toString() +
+                    "\nHeap:\n" + heap.toString() + "\n";
+
         return "Program ID: "+ this.get_id()+
                 "ExeStack:\n" + exeStack.toString() +
                 "\nSymTable:\n" + symTable.toString() +

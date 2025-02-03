@@ -4,10 +4,13 @@ import Exceptions.DataStructureException;
 import Exceptions.ExpressionEvaluationException;
 import Exceptions.MyException;
 import Exceptions.StatementExecutionException;
+import Model.DataStructures.Classes.MyDictionary;
+import Model.DataStructures.Interfaces.MyIDictionary;
 import Model.Expressions.IExp;
 import Model.PrgState;
 import Model.Types.Classes.IntType;
 import Model.Types.Classes.StringType;
+import Model.Types.Interfaces.IType;
 import Model.Values.Classes.IntValue;
 import Model.Values.Classes.StringValue;
 import Model.Values.Interfaces.IValue;
@@ -59,6 +62,17 @@ public class ReadFileStmt implements IStmt{
     @Override
     public IStmt deepCopy() {
         return new ReadFileStmt(exp.deepcopy(), var_name);
+    }
+
+    @Override
+    public MyIDictionary<String, IType> typecheck(MyIDictionary<String, IType> typeEnv) throws MyException {
+        IType typeexp = exp.typecheck(typeEnv);
+        if (typeexp.equals(new StringType())) {
+            return typeEnv;
+        }
+        else {
+            throw StatementExecutionException.TypeMissmatch("The expression must return a string");
+        }
     }
 
     @Override

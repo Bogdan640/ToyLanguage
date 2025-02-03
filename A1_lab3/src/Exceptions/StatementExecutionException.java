@@ -12,4 +12,7 @@ public class StatementExecutionException extends MyException {
     public static StatementExecutionException FileError(String additionalMessage) {
         return new StatementExecutionException("File error", additionalMessage);
     }
+    public static StatementExecutionException TypeMissmatch(String additionalMessage) {
+        return new StatementExecutionException("Type missmatch", additionalMessage);
+    }
 }

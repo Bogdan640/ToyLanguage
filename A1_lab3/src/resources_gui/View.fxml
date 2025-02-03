@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.GUIController">
+    <children>
+        <VBox spacing="10" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+            <children>
+                <HBox spacing="10">
+                    <children>
+                        <VBox spacing="10">
+                            <children>
+                                <Label text="Number of PrgStates:" />
+                            </children>
+                        </VBox>
+                        <TextField fx:id="numPrgStates" editable="false" />
+                        <Button onAction="#handleRunOneStep" text="Run One Step" />
+                    </children>
+                </HBox>
+                <SplitPane dividerPositions="0.6" orientation="VERTICAL" prefHeight="600.0" prefWidth="764.0">
+                    <items>
+                        <!-- Top SplitPane -->
+                        <SplitPane dividerPositions="0.37401574803149606, 0.6863517060367454" orientation="HORIZONTAL" prefHeight="219.0" prefWidth="764.0">
+                            <items>
+                                <VBox alignment="TOP_CENTER" spacing="10">
+                                    <children>
+                                        <Label text="Exe Stack" />
+                                        <ListView fx:id="exeStackListView" />
+                                    </children>
+                                </VBox>
+                                <VBox alignment="TOP_CENTER" prefHeight="326.0" prefWidth="247.0" spacing="10">
+                                    <children>
+                                        <Label text="Sym Table" />
+                                        <TableView fx:id="symTableView">
+                                            <columns>
+                                                <TableColumn fx:id="symVarNameCol" text="Variable Name" />
+                                                <TableColumn fx:id="symValueCol" text="Value" />
+                                            </columns>
+                                            <columnResizePolicy>
+                                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                            </columnResizePolicy>
+                                        </TableView>
+                                    </children>
+                                </VBox>
+                                <VBox alignment="TOP_CENTER" spacing="10">
+                                    <children>
+                                        <Label text="Heap Table" textAlignment="CENTER" />
+                                        <TableView fx:id="heapTableView">
+                                            <columns>
+                                                <TableColumn fx:id="heapAddressCol" text="Address" />
+                                                <TableColumn fx:id="heapValueCol" text="Value" />
+                                            </columns>
+                                            <columnResizePolicy>
+                                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                            </columnResizePolicy>
+                                        </TableView>
+                                    </children>
+                                </VBox>
+
+                            </items>
+                        </SplitPane>
+
+                        <!-- Bottom SplitPane -->
+                        <SplitPane dividerPositions="0.3753280839895013, 0.6850393700787402" orientation="HORIZONTAL" prefHeight="339.0" prefWidth="762.0">
+                            <items>
+                                <VBox alignment="TOP_CENTER" spacing="10">
+                                    <children>
+                                        <Label text="PrgState Identifiers" />
+                                        <ListView fx:id="prgStateListView" />
+                                    </children>
+                                </VBox>
+                                <VBox alignment="TOP_CENTER" spacing="10">
+                                    <children>
+                                        <Label text="File Table" />
+                                        <ListView fx:id="fileTableListView" />
+                                    </children>
+                                </VBox>
+                                <VBox alignment="TOP_CENTER" spacing="10">
+                                    <children>
+                                        <Label alignment="TOP_CENTER" contentDisplay="CENTER" text="Output List" />
+                                        <ListView fx:id="outListView" />
+                                    </children>
+                                </VBox>
+                            </items>
+                        </SplitPane>
+                    </items>
+                </SplitPane>
+
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

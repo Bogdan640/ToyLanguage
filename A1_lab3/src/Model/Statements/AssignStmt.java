@@ -3,6 +3,8 @@ package Model.Statements;
 import Exceptions.DataStructureException;
 import Exceptions.ExpressionEvaluationException;
 import Exceptions.MyException;
+import Exceptions.StatementExecutionException;
+import Model.DataStructures.Classes.MyDictionary;
 import Model.DataStructures.Interfaces.MyIDictionary;
 import Model.DataStructures.Interfaces.MyIStack;
 import Model.Expressions.IExp;
@@ -50,4 +52,13 @@ public class AssignStmt implements IStmt{
     public IStmt deepCopy() {
         return new AssignStmt(key, exp.deepcopy());
     }
+
+    @Override
+    public MyIDictionary<String, IType> typecheck(MyIDictionary<String, IType> typeEnv) throws MyException {
+        IType typevar = typeEnv.find(key);
+        IType typexp = exp.typecheck(typeEnv);
+        if (typevar.equals(typexp))
+            return typeEnv;
+        else
+            throw StatementExecutionException.TypeMissmatch("Assignment: right hand side and left hand side have different types ");    }
 }

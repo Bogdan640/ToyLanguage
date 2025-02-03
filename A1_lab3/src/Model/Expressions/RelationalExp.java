@@ -5,6 +5,7 @@ import Exceptions.MyException;
 import Model.DataStructures.Interfaces.MyIDictionary;
 import Model.DataStructures.Interfaces.MyIHeap;
 import Model.Types.Classes.IntType;
+import Model.Types.Interfaces.IType;
 import Model.Values.Classes.BoolValue;
 import Model.Values.Classes.IntValue;
 import Model.Values.Interfaces.IValue;
@@ -47,6 +48,22 @@ public class RelationalExp implements IExp{
     @Override
     public IExp deepcopy() {
         return new RelationalExp(e1.deepcopy(),op,e2.deepcopy());
+    }
+
+    @Override
+    public IType typecheck(MyIDictionary<String, IType> typeEnv) throws MyException {
+        IType t1, t2;
+        t1 = e1.typecheck(typeEnv);
+        t2 = e2.typecheck(typeEnv);
+        if (t1.equals(new IntType())) {
+            if (t2.equals(new IntType())) {
+                return new BoolValue(true).getType();
+            } else {
+                throw ExpressionEvaluationException.type_mismatch("The second operand should be an integer");
+            }
+        } else {
+            throw ExpressionEvaluationException.type_mismatch("The first operand should be an integer");
+        }
     }
 
     @Override

@@ -3,11 +3,13 @@ package Model.Statements;
 import Exceptions.DataStructureException;
 import Exceptions.ExpressionEvaluationException;
 import Exceptions.MyException;
+import Model.DataStructures.Classes.MyDictionary;
 import Model.DataStructures.Interfaces.MyIDictionary;
 import Model.DataStructures.Interfaces.MyIHeap;
 import Model.Expressions.IExp;
 import Model.PrgState;
 import Model.Types.Classes.RefType;
+import Model.Types.Interfaces.IType;
 import Model.Values.Classes.RefValue;
 import Model.Values.Interfaces.IValue;
 
@@ -54,5 +56,16 @@ public class HeapWritingStmt implements IStmt{
     @Override
     public IStmt deepCopy() {
         return new HeapWritingStmt(new String(var_name), exp.deepcopy());
+    }
+
+    @Override
+    public MyIDictionary<String, IType> typecheck(MyIDictionary<String, IType> typeEnv) throws MyException {
+        IType typeVar = typeEnv.find(var_name);
+        IType typeExp = exp.typecheck(typeEnv);
+
+        if(!typeVar.equals(new RefType(typeExp)))
+            throw ExpressionEvaluationException.type_mismatch("The variable " + var_name + " is not of the same type as the expression");
+
+        return typeEnv;
     }
 }

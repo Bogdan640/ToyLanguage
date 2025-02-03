@@ -4,6 +4,7 @@ import Exceptions.DataStructureException;
 import Exceptions.MyException;
 import Model.DataStructures.Interfaces.MyIDictionary;
 import Model.DataStructures.Interfaces.MyIHeap;
+import Model.Types.Interfaces.IType;
 import Model.Values.Interfaces.IValue;
 
 public class VarExp implements IExp {
@@ -28,5 +29,10 @@ public class VarExp implements IExp {
     @Override
     public IExp deepcopy() {
         return new VarExp(key);
+    }
+
+    @Override
+    public IType typecheck(MyIDictionary<String, IType> typeEnv) throws MyException {
+        return typeEnv.find(key);
     }
 }

@@ -8,4 +8,5 @@ public interface MyIQueue<T> {
     T top() throws MyException;
     boolean isEmpty();
     String toString();
+
 }

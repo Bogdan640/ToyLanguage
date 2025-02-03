@@ -54,6 +54,7 @@ public class Repo implements IRepo{
 
     @Override
     public void logPrgStateExec(PrgState prg) throws MyException, IOException {
+
         PrintWriter logFile = new PrintWriter(new BufferedWriter(new FileWriter(filename, true)));
         logFile.println("Program State ID: "+prg.get_id());
         logFile.println("ExeStack:");
@@ -63,11 +64,15 @@ public class Repo implements IRepo{
         logFile.println(prg.getSymTable().toString());
         logFile.print("\n\n");
         logFile.println("Out:");
-        logFile.println(prg.getOut().toString());
+        if(prg.getOut() == null)
+            logFile.println(prg.getOutput().toString());
+        else
+            logFile.println(prg.getOut().toString());
         logFile.print("\n\n");
         logFile.println("Heap:");
         logFile.println(prg.getHeap().toString());
         logFile.close();
+
     }
 
 

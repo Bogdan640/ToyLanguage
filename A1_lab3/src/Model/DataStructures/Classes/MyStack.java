@@ -38,6 +38,10 @@ public class MyStack<T> implements MyIStack<T> {
         return stack.peek();
     }
 
+    public Stack<T> getStack() {
+        return this.stack;
+    }
+
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder();

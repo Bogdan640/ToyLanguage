@@ -1,10 +1,7 @@
 package Controller;
 
-import Exceptions.ControllerException;
 import Exceptions.MyException;
-import Model.DataStructures.Interfaces.MyIStack;
 import Model.PrgState;
-import Model.Statements.IStmt;
 import Model.Values.Classes.RefValue;
 import Model.Values.Interfaces.IValue;
 import Repository.IRepo;
@@ -23,7 +20,7 @@ public class Ctrl implements ICtrl{
 
     private IRepo repo;
     private boolean displayFlag;
-    private ExecutorService executor;
+    public ExecutorService executor;
 
     public Ctrl(IRepo repo, boolean displayFlag){
         this.repo=repo;
@@ -33,6 +30,10 @@ public class Ctrl implements ICtrl{
     public Ctrl (IRepo repo){
         this.repo=repo;
         this.displayFlag=false;
+    }
+
+    public IRepo getRepo() {
+        return repo;
     }
 
 
@@ -101,7 +102,7 @@ public class Ctrl implements ICtrl{
 //        return state;
 //    }
 
-    Map<Integer, IValue> conservativeGarbageCollector(List<PrgState> prgStates){
+    public Map<Integer, IValue> conservativeGarbageCollector(List<PrgState> prgStates){
         List<Integer> symTablesAddresses = prgStates.stream()
                 .flatMap(prg -> getAddrFromSymTable(prg.getSymTable().getContent().values()).stream())
                 .collect(Collectors.toList());
@@ -115,10 +116,12 @@ public class Ctrl implements ICtrl{
 
 
 
-    void oneStepForAllPrg(List<PrgState> prgList) throws InterruptedException {
+    public void oneStepForAllPrg(List<PrgState> prgList) throws InterruptedException {
         prgList.forEach(prg -> {
             try {
+
                 repo.logPrgStateExec(prg);
+
                 //displayPrgState();
             } catch (MyException | IOException e) {
                 throw new RuntimeException(e);
@@ -154,11 +157,11 @@ public class Ctrl implements ICtrl{
     public void allStep() throws MyException, IOException, InterruptedException {
 
         executor = Executors.newFixedThreadPool(2);
-        List<PrgState> prgList = removeCompleatedPrg(repo.getPrgList());
+        List<PrgState> prgList = removeCompletedPrg(repo.getPrgList());
         while(!prgList.isEmpty()){
             conservativeGarbageCollector(prgList);
             oneStepForAllPrg(prgList);
-            prgList = removeCompleatedPrg(repo.getPrgList());
+            prgList = removeCompletedPrg(repo.getPrgList());
         }
         executor.shutdownNow();
 
@@ -185,7 +188,7 @@ public class Ctrl implements ICtrl{
     }
 
 
-    List<PrgState> removeCompleatedPrg(List<PrgState> inPrgList){
+    public List<PrgState> removeCompletedPrg(List<PrgState> inPrgList){
         return inPrgList.stream().
                 filter(p -> p.isNotCompleted()).
                 collect(Collectors.toList());
