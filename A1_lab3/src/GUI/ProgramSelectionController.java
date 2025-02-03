@@ -1,7 +1,10 @@
 package GUI;
 
+import Exceptions.MyException;
+import Model.DataStructures.Classes.MyDictionary;
 import Model.Types.Classes.IntType;
 import Model.Types.Classes.RefType;
+import Model.Types.Interfaces.IType;
 import Model.Values.Classes.IntValue;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -33,7 +36,7 @@ public class ProgramSelectionController {
 
     private List<IStmt> programs; // List of IStmt instances
 
-    public void initialize() {
+    public void initialize() throws MyException {
         programs = loadPrograms();
         programListView.setItems(FXCollections.observableArrayList(
                 programs.stream().map(IStmt::toString).toList()
@@ -41,7 +44,7 @@ public class ProgramSelectionController {
     }
 
     // Write the program examples
-    private List<IStmt> loadPrograms() {
+    private List<IStmt> loadPrograms() throws MyException {
         List<IStmt> programExamples = new ArrayList<>();
 
         // example 1
@@ -77,6 +80,54 @@ public class ProgramSelectionController {
         IStmt ex2 = new CompStmt(v2, new CompStmt(h1, new CompStmt(forStmt, p2)));
 
         programExamples.add(ex2);
+//        try{
+//            ex2.typecheck(new MyDictionary<String, IType>());
+//        }catch (MyException e){
+//            System.out.println(e.getMessage());
+//        }
+
+
+        // example 3
+        IStmt ex3 = new CompStmt(new VarDeclStmt("v1", new RefType(new IntType())),
+                new CompStmt(new VarDeclStmt("v2", new RefType(new IntType())),
+                        new CompStmt(new VarDeclStmt("x", new IntType()),
+                                new CompStmt(new VarDeclStmt("q", new IntType()),
+                                        new CompStmt(new HeapAllocationStmt("v1", new ValueExp(new IntValue(20))),
+                                                new CompStmt(new HeapAllocationStmt("v2", new ValueExp(new IntValue(30))),
+                                                        new CompStmt(new NewLockStmt("x"),
+                                                                new CompStmt(new ForkStmt(
+                                                                        new CompStmt(new ForkStmt(
+                                                                                new CompStmt(new LockStmt("x"),
+                                                                                        new CompStmt(new HeapWritingStmt("v1", new ArithExp( new HeapReadingExp(new VarExp("v1")),"-", new ValueExp(new IntValue(1)))),
+                                                                                                new UnlockStmt("x")))
+                                                                        ),
+                                                                                new CompStmt(new LockStmt("x"),
+                                                                                        new CompStmt(new HeapWritingStmt("v1", new ArithExp( new HeapReadingExp(new VarExp("v1")),"*", new ValueExp(new IntValue(10)))),
+                                                                                                new UnlockStmt("x"))))
+                                                                ),
+                                                                        new CompStmt( new NewLockStmt("q"),
+                                                                                new CompStmt(new ForkStmt(
+                                                                                        new CompStmt( new ForkStmt(
+                                                                                                new CompStmt(new LockStmt("q"),
+                                                                                                        new CompStmt(new HeapWritingStmt("v2", new ArithExp( new HeapReadingExp(new VarExp("v2")),"+", new ValueExp(new IntValue(5)))),
+                                                                                                                new UnlockStmt("q")))
+                                                                                        ),
+                                                                                                new CompStmt(new LockStmt("q"),
+                                                                                                        new CompStmt(new HeapWritingStmt("v2", new ArithExp( new HeapReadingExp(new VarExp("v2")),"*", new ValueExp(new IntValue(10)))),
+                                                                                                                new UnlockStmt("q"))))
+                                                                                ),
+                                                                                        new CompStmt(new NoopStmt(),
+                                                                                                new CompStmt(new NoopStmt(),
+                                                                                                        new CompStmt(new NoopStmt(),
+                                                                                                                new CompStmt(new NoopStmt(),
+                                                                                                                        new CompStmt(new LockStmt("x"),
+                                                                                                                                new CompStmt(new PrintStmt(new HeapReadingExp(new VarExp("v1"))),
+                                                                                                                                        new CompStmt(new UnlockStmt("x"),
+                                                                                                                                                new CompStmt(new LockStmt("q"),
+                                                                                                                                                        new CompStmt(new PrintStmt(new HeapReadingExp(new VarExp("v2"))),
+                                                                                                                                                                new UnlockStmt("q"))))))))))))))))))));
+
+        programExamples.add(ex3);
         return programExamples;
     }
 

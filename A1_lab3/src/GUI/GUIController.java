@@ -2,6 +2,7 @@ package GUI;
 
 import Controller.Ctrl;
 import Exceptions.RepoException;
+import Model.DataStructures.Classes.*;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,10 +10,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Pair;
-import Model.DataStructures.Classes.MyDictionary;
-import Model.DataStructures.Classes.MyHeap;
-import Model.DataStructures.Classes.MyList;
-import Model.DataStructures.Classes.MyStack;
 import Model.PrgState;
 import Model.Statements.IStmt;
 import Repository.IRepo;
@@ -55,7 +52,7 @@ public class GUIController{
 
     public void initializeExecution(IStmt program) throws RepoException {
         PrgState initialPrgState = new PrgState(
-                new MyStack<>(), new MyDictionary<>(), new MyList<>(), program, new MyDictionary<>(), new MyHeap()
+                new MyStack<>(), new MyDictionary<>(), new MyList<>(), program, new MyDictionary<>(), new MyHeap(), new MyLockTable()
         );
 
 

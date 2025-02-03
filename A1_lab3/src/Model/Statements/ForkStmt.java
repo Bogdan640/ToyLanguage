@@ -21,8 +21,8 @@ public class ForkStmt implements IStmt{
         MyIStack<IStmt> newStack = new MyStack<IStmt>();
         MyIDictionary<String, IValue> newSymTable = state.getSymTable().clone();
         if(state.getOut() != null )
-            return new PrgState(newStack, newSymTable, state.getOut(), stmt, state.getFileTable() ,state.getHeap());
-        return new PrgState(newStack, newSymTable, state.getOutput(), stmt, state.getFileTable() ,state.getHeap());
+            return new PrgState(newStack, newSymTable, state.getOut(), stmt, state.getFileTable() ,state.getHeap(), state.getLockTable());
+        return new PrgState(newStack, newSymTable, state.getOutput(), stmt, state.getFileTable() ,state.getHeap(), state.getLockTable());
     }
 
     @Override
