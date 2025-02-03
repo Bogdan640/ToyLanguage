@@ -21,6 +21,7 @@ public class PrgState {
     private IStmt originalProgram;
     private MyIDictionary<StringValue, BufferedReader> fileTable;
     private MyIHeap heap;
+    private MyILockTable lockTable;
 
     private int id;
     private static  int global_id = 1;
@@ -34,7 +35,7 @@ public class PrgState {
     }
 
     public PrgState(MyIStack<IStmt> stk, MyIDictionary<String, IValue> dic, MyIQueue<IValue> q, IStmt prg,
-                    MyIDictionary<StringValue, BufferedReader> fileTable, MyIHeap heap){
+                    MyIDictionary<StringValue, BufferedReader> fileTable, MyIHeap heap, MyILockTable lockTable){
         this.exeStack=stk;
         this.symTable=dic;
         this.out=q;
@@ -43,10 +44,11 @@ public class PrgState {
         this.originalProgram= prg.deepCopy();
         this.exeStack.push(originalProgram);
         this.id = generate_id();
+        this.lockTable = lockTable;
 
     }
 
-    public PrgState(MyIStack<IStmt> stk, MyIDictionary<String, IValue> dic, MyIQueue<IValue> q, IStmt prg, MyIHeap heap){
+    public PrgState(MyIStack<IStmt> stk, MyIDictionary<String, IValue> dic, MyIQueue<IValue> q, IStmt prg, MyIHeap heap, MyILockTable lockTable){
         this.exeStack=stk;
         this.symTable=dic;
         this.out=q;
@@ -54,10 +56,11 @@ public class PrgState {
         this.originalProgram= prg.deepCopy();
         this.exeStack.push(originalProgram);
         this.id = generate_id();
+        this.lockTable = lockTable;
     }
 
     public PrgState(MyIStack<IStmt> stk, MyIDictionary<String, IValue> dic, MyIList<IValue> q, IStmt prg,
-                    MyIDictionary<StringValue, BufferedReader> fileTable, MyIHeap heap){
+                    MyIDictionary<StringValue, BufferedReader> fileTable, MyIHeap heap, MyILockTable lockTable){
         this.exeStack=stk;
         this.symTable=dic;
         this.output=q;
@@ -66,11 +69,12 @@ public class PrgState {
         this.originalProgram= prg.deepCopy();
         this.exeStack.push(originalProgram);
         this.id = generate_id();
+        this.lockTable = lockTable;
 
     }
 
 
-    public PrgState(MyIStack<IStmt> stk, MyIDictionary<String, IValue> dic, MyIList<IValue> q, IStmt prg, MyIHeap heap){
+    public PrgState(MyIStack<IStmt> stk, MyIDictionary<String, IValue> dic, MyIList<IValue> q, IStmt prg, MyIHeap heap, MyILockTable lockTable){
         this.exeStack=stk;
         this.symTable=dic;
         this.output=q;
@@ -78,8 +82,16 @@ public class PrgState {
         this.originalProgram= prg.deepCopy();
         this.exeStack.push(originalProgram);
         this.id = generate_id();
+        this.lockTable = lockTable;
     }
 
+
+    public MyILockTable getLockTable(){
+        return this.lockTable;
+    }
+    public void setLockTable(MyILockTable newLockTable){
+        this.lockTable = newLockTable;
+    }
     public MyIDictionary<StringValue, BufferedReader> getFileTable(){
         return this.fileTable;
     }
@@ -135,6 +147,14 @@ public class PrgState {
 //    public PrgState deepcopy(){
 //        return new PrgState(this.exeStack.deepcopy(), this.symTable.deepcopy(), this.out.deepcopy(), this.originalProgram.deepcopy());
 //    }
+
+    String lockTableToString() throws DataStructureException {
+        StringBuilder result = new StringBuilder();
+        for(int key: lockTable.keySet()){
+            result.append(String.format("%d -> %d\n", key, lockTable.find(key)));;
+        }
+        return result.toString();
+    }
 
     @Override
     public String toString(){

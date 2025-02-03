@@ -20,6 +20,10 @@ public class DataStructureException extends MyException {
     public static DataStructureException clone_problem(String additionalMessage) {
         return new DataStructureException("The clone operation failed", additionalMessage);
     }
+
+    public static DataStructureException type_mismatch(String additionalMessage) {
+        return new DataStructureException("The type is invalid", additionalMessage);
+    }
 }
 
 

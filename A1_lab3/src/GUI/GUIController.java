@@ -2,6 +2,7 @@ package GUI;
 
 import Controller.Ctrl;
 import Exceptions.RepoException;
+import Model.DataStructures.Classes.*;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,10 +10,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Pair;
-import Model.DataStructures.Classes.MyDictionary;
-import Model.DataStructures.Classes.MyHeap;
-import Model.DataStructures.Classes.MyList;
-import Model.DataStructures.Classes.MyStack;
 import Model.PrgState;
 import Model.Statements.IStmt;
 import Repository.IRepo;
@@ -46,6 +43,12 @@ public class GUIController{
     private TableColumn<Pair<Integer, String>, String> heapAddressCol;
     @FXML
     private TableColumn<Pair<Integer, String>, String> heapValueCol;
+    @FXML
+    private TableView<Pair<Integer, Integer>> LockTableView;
+    @FXML
+    private TableColumn<Pair<Integer, Integer>, String> LockLocationColumn;
+    @FXML
+    private TableColumn<Pair<Integer, Integer>, String> LockValueColumn;
 
     @FXML
     private Button runButton;
@@ -55,7 +58,7 @@ public class GUIController{
 
     public void initializeExecution(IStmt program) throws RepoException {
         PrgState initialPrgState = new PrgState(
-                new MyStack<>(), new MyDictionary<>(), new MyList<>(), program, new MyDictionary<>(), new MyHeap()
+                new MyStack<>(), new MyDictionary<>(), new MyList<>(), program, new MyDictionary<>(), new MyHeap(), new MyLockTable()
         );
 
 
@@ -124,7 +127,7 @@ public class GUIController{
 
             // Remove the completed programs
             List<PrgState> prgList = controller.removeCompletedPrg(controller.getRepo().getPrgList());
-
+            //pr
             if (prgList.isEmpty()) {
                 showError("No more steps to execute.");
                 prgStateListView.getItems().clear();
@@ -192,6 +195,7 @@ public class GUIController{
                 updateFileTable(selectedPrgState);
                 updateSymTable(selectedPrgState);
                 updateExeStack(selectedPrgState);
+                updateLockTable(selectedPrgState);
             }
         } catch (Exception e) {
             showError("I AM HERE: " + e.getMessage());
@@ -231,6 +235,19 @@ public class GUIController{
 //            showError(e.getMessage());
 //        }
 //    }
+
+    private void updateLockTable(PrgState prgState) {
+        ObservableList<Pair<Integer, Integer>> lockTableItems = FXCollections.observableArrayList(
+                prgState.getLockTable().getContent().entrySet().stream()
+                        .map(entry -> new Pair<>(entry.getKey(), entry.getValue()))
+                        .collect(Collectors.toList())
+        );
+        // Bind Lock Table columns
+        LockLocationColumn.setCellValueFactory(data -> new SimpleStringProperty(String.valueOf(data.getValue().getKey())));
+        LockValueColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getValue().toString()));
+        LockTableView.setItems(lockTableItems);
+    }
+
 
     private void updateHeapTable(PrgState prgState) {
         ObservableList<Pair<Integer, String>> heapTableItems = FXCollections.observableArrayList(
