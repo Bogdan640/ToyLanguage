@@ -48,6 +48,9 @@ public class ForStmt implements IStmt{
     @Override
     public MyIDictionary<String, IType> typecheck(MyIDictionary<String, IType> typeEnv) throws MyException {
 
+        IStmt vardeclstmt = new VarDeclStmt(var, new IntType());
+        vardeclstmt.typecheck(typeEnv);
+
         IType typeexp1 = exp1.typecheck(typeEnv);
         IType typeexp2 = exp2.typecheck(typeEnv);
         IType typeexp3 = exp3.typecheck(typeEnv);
