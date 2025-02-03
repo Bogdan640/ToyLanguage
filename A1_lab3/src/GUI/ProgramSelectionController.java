@@ -64,6 +64,19 @@ public class ProgramSelectionController {
 
         programExamples.add(ex1);
 
+        // example 2
+        //Ref int a;  new (a, 20); (for (v=0; v<3; v = v+1) fork(print (v); v=v*rH(a))); print(rH(a))
+        //VarDeclStmt v1 = new VarDeclStmt("v", new IntType());
+        VarDeclStmt v2 = new VarDeclStmt("a", new RefType(new IntType()));
+        HeapAllocationStmt h1 = new HeapAllocationStmt("a", new ValueExp(new IntValue(20)));
+        PrintStmt p1 = new PrintStmt(new VarExp("v"));
+        AssignStmt a1 = new AssignStmt("v", new ArithExp(new VarExp("v"), "*", new HeapReadingExp(new VarExp("a"))));
+        ForkStmt f1 = new ForkStmt(new CompStmt(p1, a1));
+        ForStmt forStmt = new ForStmt("v", new ValueExp(new IntValue(0)), new ValueExp(new IntValue(3)), new ArithExp(new VarExp("v"), "+", new ValueExp(new IntValue(1))),f1);
+        PrintStmt p2 = new PrintStmt(new HeapReadingExp(new VarExp("a")));
+        IStmt ex2 = new CompStmt(v2, new CompStmt(h1, new CompStmt(forStmt, p2)));
+
+        programExamples.add(ex2);
         return programExamples;
     }
 
