@@ -15,4 +15,7 @@ public class StatementExecutionException extends MyException {
     public static StatementExecutionException TypeMissmatch(String additionalMessage) {
         return new StatementExecutionException("Type missmatch", additionalMessage);
     }
+    public static StatementExecutionException FunctionError(String additionalMessage) {
+        return new StatementExecutionException("Function error", additionalMessage);
+    }
 }

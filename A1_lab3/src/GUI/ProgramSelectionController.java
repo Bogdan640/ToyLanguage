@@ -25,8 +25,7 @@ import Model.Statements.*;
 import Model.Expressions.*;
 
 
-
-
+import java.util.Arrays;
 import java.util.List;
 public class ProgramSelectionController {
     @FXML
@@ -194,7 +193,54 @@ public class ProgramSelectionController {
                                                                                 new PrintStmt(new ArithExp( new VarExp("v"),"*", new ValueExp(new IntValue(10))))))))))
                         )));
         programExamples.add(ex7);
-        
+
+        // example 8
+        IStmt ex8 =
+                new CompStmt(
+                        new VarDeclStmt("v", new IntType()),
+                        new CompStmt(
+                                new AssignStmt("v", new ValueExp(new IntValue(2))),
+                                new CompStmt(
+                                        new VarDeclStmt("w",new IntType()),
+                                        new CompStmt(
+                                                new AssignStmt("w", new ValueExp(new IntValue(5))),
+                                                new CompStmt(
+                                                        new FuncCallStmt(
+                                                                "sum",
+                                                                Arrays.asList(
+                                                                        new ArithExp(new VarExp("v"),"*", new ValueExp(new IntValue(10))),
+                                                                        new VarExp("w")
+                                                                )
+                                                        ),
+                                                        new CompStmt(
+                                                                new PrintStmt(new VarExp("v")),
+                                                                new CompStmt(
+                                                                        new FuncCallStmt(
+                                                                                "product",
+                                                                                Arrays.asList(
+                                                                                        new VarExp("v"),
+                                                                                        new VarExp("w")
+                                                                                )
+                                                                        ),
+                                                                        new ForkStmt(
+                                                                                new FuncCallStmt(
+                                                                                        "sum",
+                                                                                        Arrays.asList(
+                                                                                                new VarExp("v"),
+                                                                                                new VarExp("w")
+                                                                                        )
+                                                                                )
+                                                                        )
+                                                                )
+                                                        )
+                                                )
+                                        )
+                                )
+                        )
+                );
+
+
+        programExamples.add(ex8);
         return programExamples;
     }
 

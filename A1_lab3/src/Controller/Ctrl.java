@@ -97,14 +97,20 @@ public class Ctrl implements ICtrl{
 //            throw ControllerException.is_empty("CTRL ERROR: Execution stack is empty");
 //        IStmt crtStmt = stk.pop();
 //        crtStmt.execute(state);
-////        if(displayFlag)
-////            System.out.println(repo.getCrtPrg());
+    ////        if(displayFlag)
+    ////            System.out.println(repo.getCrtPrg());
 //        return state;
 //    }
 
     public Map<Integer, IValue> conservativeGarbageCollector(List<PrgState> prgStates){
         List<Integer> symTablesAddresses = prgStates.stream()
-                .flatMap(prg -> getAddrFromSymTable(prg.getSymTable().getContent().values()).stream())
+                .flatMap(prg -> {
+                    try {
+                        return getAddrFromSymTable(prg.getSymTable().getContent().values()).stream();
+                    } catch (MyException e) {
+                        throw new RuntimeException(e);
+                    }
+                })
                 .collect(Collectors.toList());
         Map<Integer, IValue> heap = prgStates.getFirst().getHeap().getContent();
         List<Integer> reachable = getAllAddresses(symTablesAddresses, heap);

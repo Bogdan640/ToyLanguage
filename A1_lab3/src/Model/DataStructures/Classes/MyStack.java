@@ -51,5 +51,14 @@ public class MyStack<T> implements MyIStack<T> {
         }
         return str.toString();
     }
+
+    //create clone for stack
+    public MyStack<T> deepcopy(){
+        MyStack<T> newStack = new MyStack<T>();
+        for(T elem : stack){
+            newStack.push(elem);
+        }
+        return newStack;
+    }
 }
 

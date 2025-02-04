@@ -33,7 +33,7 @@ public class NewLockStmt implements IStmt{
         if(symTable.exist(var) && symTable.find(var).getType().equals(new IntType()))
             symTable.update(var, new IntValue(freeLocation));
         else
-           throw StatementExecutionException.TypeMissmatch("The variable " + var + " is not an integer");
+            throw StatementExecutionException.TypeMissmatch("The variable " + var + " is not an integer");
         lock.unlock();
         return null;
 
